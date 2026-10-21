@@ -5,7 +5,12 @@
 
 ![byBias-Icons-Packet icoon](icons-packet.svg)
 
-**Een uniforme GTK-app voor het beheren van een persoonlijke iconencollectie op Linux Mint / Cinnamon — inclusief een kant-en-klare collectie van bijna 30.000 iconen (140 MB).**
+<p align="center">
+  <img src="screenshots/01-dashboard.png" width="45%" alt="byBias-Icons-Packet: dashboard">
+  <img src="screenshots/02-main-flow.png" width="45%" alt="byBias-Icons-Packet: main flow actions">
+</p>
+
+**Een uniforme GTK-app voor het beheren van een persoonlijke iconencollectie op Linux Mint / Cinnamon.**
 
 🇬🇧 [README-EN.md](README-EN.md) · 🇮🇹 [README-IT.md](README-IT.md) · 🇩🇪 [README-DE.md](README-DE.md) · 🇪🇸 [README-ES.md](README-ES.md) · 🇫🇷 [README-FR.md](README-FR.md) · 🇳🇱 [README-NL.md](README-NL.md) · 🇷🇺 [README-RU.md](README-RU.md) · 🇸🇦 [README-AR.md](README-AR.md) · 🇨🇳 [README-ZH.md](README-ZH.md) · 🇯🇵 [README-JA.md](README-JA.md)
 
@@ -27,9 +32,9 @@
 ---
 
 **byBias-Icons-Packet** bundelt de volledige byBias-iconenset in één
-GTK3-app, en wordt geleverd samen met de collectie waarvoor het is
-gebouwd: een verzorgde, opgeschoonde, consistent benoemde set van **bijna
-30.000 iconen (140 MB)**, klaar om direct in een thema te zetten. Het
+GTK3-app, gemaakt om *je eigen* iconencollectie te beheren: extraheren,
+opschonen, consistent benoemen en er een thema van maken. Een vrij
+icoonthema (GPL-3), gemaakt met de app, is onderweg. Het
 hoofdvenster is een dashboard: elke actie is een zichtbare kaart, en een
 klik opent het bijbehorende paneel in hetzelfde venster — geen menu's
 doorzoeken, geen commando's onthouden.

@@ -5,7 +5,12 @@
 
 ![byBias-Icons-Packet 图标](icons-packet.svg)
 
-**一款统一的 GTK 应用，用于在 Linux Mint / Cinnamon 上管理个人图标收藏——并随附一套开箱即用、近 30,000 个图标（140 MB）的收藏。**
+<p align="center">
+  <img src="screenshots/01-dashboard.png" width="45%" alt="byBias-Icons-Packet: dashboard">
+  <img src="screenshots/02-main-flow.png" width="45%" alt="byBias-Icons-Packet: main flow actions">
+</p>
+
+**一款统一的 GTK 应用，用于在 Linux Mint / Cinnamon 上管理个人图标收藏。**
 
 🇬🇧 [README-EN.md](README-EN.md) · 🇮🇹 [README-IT.md](README-IT.md) · 🇩🇪 [README-DE.md](README-DE.md) · 🇪🇸 [README-ES.md](README-ES.md) · 🇫🇷 [README-FR.md](README-FR.md) · 🇳🇱 [README-NL.md](README-NL.md) · 🇷🇺 [README-RU.md](README-RU.md) · 🇸🇦 [README-AR.md](README-AR.md) · 🇨🇳 [README-ZH.md](README-ZH.md) · 🇯🇵 [README-JA.md](README-JA.md)
 
@@ -24,8 +29,8 @@
 ---
 
 **byBias-Icons-Packet** 将整套 byBias 图标工具集整合到一个 GTK3 应用
-中，并随附其专为管理而生的收藏：一套经过精心整理、清理、统一命名的**近
-30,000 个图标（140 MB）**的收藏，可直接放入主题使用。主窗口是一个仪表
+中，专为管理*你自己的*图标收藏而生：提取、清理、统一命名，并制作成主题。
+一套用本应用制作的自由图标主题（GPL-3）即将推出。主窗口是一个仪表
 盘：每个操作都是一张可见的卡片，点击后会在同一窗口中打开其面板——无需在
 菜单中翻找，也无需记忆命令。
 

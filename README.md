@@ -3,6 +3,11 @@
 
 ![byBias-Icons-Packet icon](icons-packet.svg)
 
+<p align="center">
+  <img src="screenshots/01-dashboard.png" width="45%" alt="byBias-Icons-Packet: dashboard">
+  <img src="screenshots/02-main-flow.png" width="45%" alt="byBias-Icons-Packet: main flow actions">
+</p>
+
 ---
 **A unified GTK app for managing a personal icon collection on Linux Mint / Cinnamon.**
 

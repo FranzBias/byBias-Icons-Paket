@@ -5,7 +5,12 @@
 
 ![byBias-Icons-Packet icon](icons-packet.svg)
 
-**A unified GTK app for managing a personal icon collection on Linux Mint / Cinnamon — bundled with a ready-to-use collection of nearly 30,000 icons (140 MB).**
+<p align="center">
+  <img src="screenshots/01-dashboard.png" width="45%" alt="byBias-Icons-Packet: dashboard">
+  <img src="screenshots/02-main-flow.png" width="45%" alt="byBias-Icons-Packet: main flow actions">
+</p>
+
+**A unified GTK app for managing a personal icon collection on Linux Mint / Cinnamon.**
 
 🇬🇧 [README-EN.md](README-EN.md) · 🇮🇹 [README-IT.md](README-IT.md) · 🇩🇪 [README-DE.md](README-DE.md) · 🇪🇸 [README-ES.md](README-ES.md) · 🇫🇷 [README-FR.md](README-FR.md) · 🇳🇱 [README-NL.md](README-NL.md) · 🇷🇺 [README-RU.md](README-RU.md) · 🇸🇦 [README-AR.md](README-AR.md) · 🇨🇳 [README-ZH.md](README-ZH.md) · 🇯🇵 [README-JA.md](README-JA.md)
 
@@ -26,9 +31,9 @@
 ---
 
 **byBias-Icons-Packet** gathers the whole byBias icon toolkit into a single
-GTK3 app, and ships together with the collection it was built to manage: a
-curated, cleaned-up, consistently-named set of **almost 30,000 icons
-(140 MB)**, ready to drop straight into a theme. The main window is a
+GTK3 app, built to manage *your own* icon collection: extract, clean up,
+name consistently and turn it into a theme. A free icon theme made with it
+(GPL-3) is on its way. The main window is a
 dashboard: every action is a visible card, and clicking one opens its panel
 in the same window — no digging through menus, no memorising commands.
 

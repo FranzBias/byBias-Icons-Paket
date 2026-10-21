@@ -5,7 +5,12 @@
 
 ![byBias-Icons-Packet Icon](icons-packet.svg)
 
-**Eine einheitliche GTK-App zur Verwaltung einer persönlichen Icon-Sammlung unter Linux Mint / Cinnamon — mit einer einsatzbereiten Sammlung von fast 30.000 Icons (140 MB).**
+<p align="center">
+  <img src="screenshots/01-dashboard.png" width="45%" alt="byBias-Icons-Packet: dashboard">
+  <img src="screenshots/02-main-flow.png" width="45%" alt="byBias-Icons-Packet: main flow actions">
+</p>
+
+**Eine einheitliche GTK-App zur Verwaltung einer persönlichen Icon-Sammlung unter Linux Mint / Cinnamon.**
 
 🇬🇧 [README-EN.md](README-EN.md) · 🇮🇹 [README-IT.md](README-IT.md) · 🇩🇪 [README-DE.md](README-DE.md) · 🇪🇸 [README-ES.md](README-ES.md) · 🇫🇷 [README-FR.md](README-FR.md) · 🇳🇱 [README-NL.md](README-NL.md) · 🇷🇺 [README-RU.md](README-RU.md) · 🇸🇦 [README-AR.md](README-AR.md) · 🇨🇳 [README-ZH.md](README-ZH.md) · 🇯🇵 [README-JA.md](README-JA.md)
 
@@ -27,10 +32,10 @@
 ---
 
 **byBias-Icons-Packet** vereint das gesamte byBias-Icon-Toolkit in einer
-einzigen GTK3-App und wird zusammen mit der Sammlung ausgeliefert, für die
-es gebaut wurde: ein kuratiertes, aufgeräumtes, einheitlich benanntes Set
-von **fast 30.000 Icons (140 MB)**, bereit zum direkten Einsatz in einem
-Thema. Das Hauptfenster ist ein Dashboard: Jede Aktion ist eine sichtbare
+einzigen GTK3-App, gemacht für *deine eigene* Icon-Sammlung: extrahieren,
+aufräumen, einheitlich benennen und daraus ein Thema machen. Ein freies
+Icon-Thema (GPL-3), mit der App erstellt, ist in Arbeit. Das Hauptfenster
+ist ein Dashboard: Jede Aktion ist eine sichtbare
 Kachel, ein Klick öffnet das zugehörige Panel im selben Fenster — kein
 Durchsuchen von Menüs, keine Befehle zum Auswendiglernen.
 

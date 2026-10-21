@@ -5,7 +5,12 @@
 
 ![Icône de byBias-Icons-Packet](icons-packet.svg)
 
-**Une application GTK unifiée pour gérer une collection personnelle d'icônes sur Linux Mint / Cinnamon — livrée avec une collection prête à l'emploi de près de 30 000 icônes (140 Mo).**
+<p align="center">
+  <img src="screenshots/01-dashboard.png" width="45%" alt="byBias-Icons-Packet: dashboard">
+  <img src="screenshots/02-main-flow.png" width="45%" alt="byBias-Icons-Packet: main flow actions">
+</p>
+
+**Une application GTK unifiée pour gérer une collection personnelle d'icônes sur Linux Mint / Cinnamon.**
 
 🇬🇧 [README-EN.md](README-EN.md) · 🇮🇹 [README-IT.md](README-IT.md) · 🇩🇪 [README-DE.md](README-DE.md) · 🇪🇸 [README-ES.md](README-ES.md) · 🇫🇷 [README-FR.md](README-FR.md) · 🇳🇱 [README-NL.md](README-NL.md) · 🇷🇺 [README-RU.md](README-RU.md) · 🇸🇦 [README-AR.md](README-AR.md) · 🇨🇳 [README-ZH.md](README-ZH.md) · 🇯🇵 [README-JA.md](README-JA.md)
 
@@ -28,10 +33,10 @@
 ---
 
 **byBias-Icons-Packet** réunit toute la boîte à outils d'icônes byBias
-dans une seule application GTK3, et est livrée avec la collection pour
-laquelle elle a été conçue : un ensemble sélectionné, nettoyé et nommé de
-façon cohérente de **près de 30 000 icônes (140 Mo)**, prêt à intégrer
-directement dans un thème. La fenêtre principale est un tableau de bord :
+dans une seule application GTK3, conçue pour gérer *ta propre* collection :
+extraire, nettoyer, nommer de façon cohérente et en faire un thème. Un
+thème d'icônes libre (GPL-3) créé avec l'application est en préparation.
+La fenêtre principale est un tableau de bord :
 chaque action est une carte visible, et un clic ouvre son panneau dans la
 même fenêtre — pas besoin de fouiller dans des menus ni de mémoriser des
 commandes.

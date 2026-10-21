@@ -5,7 +5,12 @@
 
 ![byBias-Icons-Packet アイコン](icons-packet.svg)
 
-**Linux Mint / Cinnamon 上で個人のアイコンコレクションを管理するための統合 GTK アプリ — すぐに使える約 30,000 個（140 MB）のアイコンコレクション同梱。**
+<p align="center">
+  <img src="screenshots/01-dashboard.png" width="45%" alt="byBias-Icons-Packet: dashboard">
+  <img src="screenshots/02-main-flow.png" width="45%" alt="byBias-Icons-Packet: main flow actions">
+</p>
+
+**Linux Mint / Cinnamon 上で個人のアイコンコレクションを管理するための統合 GTK アプリ。**
 
 🇬🇧 [README-EN.md](README-EN.md) · 🇮🇹 [README-IT.md](README-IT.md) · 🇩🇪 [README-DE.md](README-DE.md) · 🇪🇸 [README-ES.md](README-ES.md) · 🇫🇷 [README-FR.md](README-FR.md) · 🇳🇱 [README-NL.md](README-NL.md) · 🇷🇺 [README-RU.md](README-RU.md) · 🇸🇦 [README-AR.md](README-AR.md) · 🇨🇳 [README-ZH.md](README-ZH.md) · 🇯🇵 [README-JA.md](README-JA.md)
 
@@ -27,10 +32,10 @@
 ---
 
 **byBias-Icons-Packet** は byBias のアイコンツール一式を単一の GTK3
-アプリにまとめたもので、まさにこのために作られたコレクション ——
-**約 30,000 個（140 MB）**の、丁寧に選別・整理され、一貫した命名規則
-で整えられたアイコン一式 —— と一緒に配布されます。テーマにそのまま組
-み込める状態です。メインウィンドウはダッシュボードで、各アクションが
+アプリにまとめたもので、*あなた自身の*アイコンコレクションを管理するために
+作られました：抽出、整理、一貫した命名、そしてテーマ化まで。このアプリで
+作った自由なアイコンテーマ（GPL-3）も準備中です。メインウィンドウは
+ダッシュボードで、各アクションが
 見えるカードになっており、クリックすると同じウィンドウ内にそのパネル
 が開きます — メニューを掘り下げる必要も、コマンドを覚える必要もあり
 ません。

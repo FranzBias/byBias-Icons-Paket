@@ -5,7 +5,12 @@
 
 ![أيقونة byBias-Icons-Packet](icons-packet.svg)
 
-**تطبيق GTK موحّد لإدارة مجموعة أيقونات شخصية على Linux Mint / Cinnamon — مرفق معه مجموعة جاهزة للاستخدام من نحو 30,000 أيقونة (140 ميغابايت).**
+<p align="center">
+  <img src="screenshots/01-dashboard.png" width="45%" alt="byBias-Icons-Packet: dashboard">
+  <img src="screenshots/02-main-flow.png" width="45%" alt="byBias-Icons-Packet: main flow actions">
+</p>
+
+**تطبيق GTK موحّد لإدارة مجموعة أيقونات شخصية على Linux Mint / Cinnamon.**
 
 🇬🇧 [README-EN.md](README-EN.md) · 🇮🇹 [README-IT.md](README-IT.md) · 🇩🇪 [README-DE.md](README-DE.md) · 🇪🇸 [README-ES.md](README-ES.md) · 🇫🇷 [README-FR.md](README-FR.md) · 🇳🇱 [README-NL.md](README-NL.md) · 🇷🇺 [README-RU.md](README-RU.md) · 🇸🇦 [README-AR.md](README-AR.md) · 🇨🇳 [README-ZH.md](README-ZH.md) · 🇯🇵 [README-JA.md](README-JA.md)
 
@@ -26,9 +31,9 @@
 ---
 
 يجمع **byBias-Icons-Packet** مجموعة أدوات أيقونات byBias بالكامل في
-تطبيق GTK3 واحد، ويأتي مرفقًا بالمجموعة التي صُمم من أجلها: مجموعة
-منتقاة بعناية، منظّفة، ومسمّاة بشكل متسق تضم **ما يقارب 30,000 أيقونة
-(140 ميغابايت)**، جاهزة للإدراج مباشرة في سمة. النافذة الرئيسية لوحة
+تطبيق GTK3 واحد، صُمّم لإدارة مجموعتك الخاصة من الأيقونات: استخراجها
+وتنظيفها وتسميتها بشكل متسق وتحويلها إلى سمة. وسمة أيقونات حرّة (GPL-3)
+مصنوعة بالتطبيق قيد الإعداد. النافذة الرئيسية لوحة
 تحكم: كل إجراء بطاقة مرئية، والنقر عليها يفتح لوحته في النافذة نفسها —
 دون الحاجة للبحث في القوائم أو حفظ الأوامر عن ظهر قلب.
 
