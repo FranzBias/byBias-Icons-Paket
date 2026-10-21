@@ -27,7 +27,7 @@ ICON_HICOLOR="$HOME/.local/share/icons/hicolor"
 SRC="$(cd "$(dirname "$0")" && pwd)"
 
 uninstall() {
-    echo "Disinstallo Icons-Packet..."
+    echo "Uninstalling Icons-Packet..."
     rm -rf "$APP_DIR"
     rm -f "$DESKTOP_DIR/icons-packet.desktop"
     for size in 16 24 32 48 64 128 256; do
@@ -36,13 +36,13 @@ uninstall() {
     rm -f "$ICON_HICOLOR/scalable/apps/icons-packet.svg"
     update-desktop-database "$DESKTOP_DIR" 2>/dev/null || true
     gtk-update-icon-cache -f "$ICON_HICOLOR" 2>/dev/null || true
-    echo "✔ Disinstallato."
+    echo "✔ Uninstalled."
     exit 0
 }
 
 [ "${1:-}" = "--uninstall" ] && uninstall
 
-echo "Installo Icons-Packet in $APP_DIR ..."
+echo "Installing Icons-Packet in $APP_DIR ..."
 mkdir -p "$APP_DIR" "$DESKTOP_DIR"
 
 # 1. copy the app files
@@ -79,9 +79,9 @@ update-desktop-database "$DESKTOP_DIR" 2>/dev/null || true
 gtk-update-icon-cache -f "$ICON_HICOLOR" 2>/dev/null || true
 
 echo ""
-echo "✔ Installato!"
+echo "✔ Installed!"
 echo "  App:     $APP_DIR"
-echo "  Menu:    Icons-Packet (categoria Accessori/Grafica)"
+echo "  Menu:    Icons-Packet (Accessories/Graphics category)"
 echo ""
-echo "Nota: se un'istanza era già aperta, chiudila e riaprila dal menu"
-echo "perché la barra applicazioni associ l'icona corretta."
+echo "Note: if an instance was already open, close it and reopen it from the menu"
+echo "so that the panel shows the right icon."
