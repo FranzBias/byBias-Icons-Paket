@@ -10,14 +10,14 @@
 ##########################################################
 # SPDX-License-Identifier: MIT
 #############################################################
-#  install.sh — installa Icons-Packet 📦🦉
+#  install.sh — installs Icons-Packet 📦🦉
 #
-#  Copia l'app in ~/.local/share/icons-packet/, installa il
-#  file .desktop (così compare nel menu e la barra applicazioni
-#  mostra l'icona giusta) e registra l'icona nel tema hicolor.
+#  Copies the app to ~/.local/share/icons-packet/, installs the
+#  .desktop file (so it shows up in the menu and the panel
+#  shows the right icon) and registers the icon in the hicolor theme.
 #
-#  Uso:  bash install.sh
-#  Disinstalla:  bash install.sh --uninstall
+#  Usage:      bash install.sh
+#  Uninstall:  bash install.sh --uninstall
 #############################################################
 set -Eeuo pipefail
 
@@ -45,12 +45,12 @@ uninstall() {
 echo "Installo Icons-Packet in $APP_DIR ..."
 mkdir -p "$APP_DIR" "$DESKTOP_DIR"
 
-# 1. copia i file dell'app
+# 1. copy the app files
 cp -r "$SRC/icons_packet_core.py" "$SRC/icons_packet_gui.py" "$SRC/icons_packet_i18n.py" \
       "$SRC/icons-packet" "$SRC/icon" "$APP_DIR/"
 chmod +x "$APP_DIR/icons-packet"
 
-# 2. registra l'icona nel tema hicolor (così il sistema la trova per nome)
+# 2. register the icon in the hicolor theme (so the system finds it by name)
 for size in 16 24 32 48 64 128 256; do
     dest="$ICON_HICOLOR/${size}x${size}/apps"
     mkdir -p "$dest"
@@ -59,7 +59,7 @@ done
 mkdir -p "$ICON_HICOLOR/scalable/apps"
 cp "$SRC/icons-packet.svg" "$ICON_HICOLOR/scalable/apps/icons-packet.svg"
 
-# 3. installa il .desktop, con i percorsi corretti per QUESTO utente
+# 3. install the .desktop file, with the right paths for THIS user
 cat > "$DESKTOP_DIR/icons-packet.desktop" <<EOF
 [Desktop Entry]
 Type=Application
@@ -74,7 +74,7 @@ Keywords=icons;theme;cinnamon;bybias;
 StartupWMClass=icons-packet
 EOF
 
-# 4. aggiorna i database
+# 4. update the databases
 update-desktop-database "$DESKTOP_DIR" 2>/dev/null || true
 gtk-update-icon-cache -f "$ICON_HICOLOR" 2>/dev/null || true
 

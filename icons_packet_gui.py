@@ -11,13 +11,13 @@
 ##########################################################
 # SPDX-License-Identifier: MIT
 """
-icons_packet_gui.py — interfaccia GTK3 di Icons-Packet 📦🦉
+icons_packet_gui.py — GTK3 interface of Icons-Packet 📦🦉
 
-Finestra principale a "dashboard": tutte le azioni sono visibili come
-riquadri cliccabili. Cliccando un'azione si apre il suo pannello nella
-stessa finestra (stack), con un pulsante "← Indietro" per tornare al menu.
+Main window as a "dashboard": every action is visible as a clickable
+tile. Clicking an action opens its panel in the same window (stack),
+with a "← Back" button to return to the menu.
 
-Tutta la logica sta in icons_packet_core.py: qui c'è solo l'interfaccia.
+All the logic lives in icons_packet_core.py: this file is only the interface.
 
 by Franz & Aldus
 """
@@ -95,15 +95,15 @@ ACTION_GROUPS = [
     ]),
 ]
 
-# lista piatta per il dispatch dei pannelli
+# flat list for dispatching the panels
 ACTIONS = [a for _grp, acts in ACTION_GROUPS for a in acts]
 
 
 # --------------------------------------------------------------------------
-#  Helper GUI
+#  GUI helpers
 # --------------------------------------------------------------------------
 def run_in_thread(fn, on_done):
-    """Esegue fn() in un thread, poi chiama on_done(result) nel main loop."""
+    """Run fn() in a thread, then call on_done(result) in the main loop."""
     def worker():
         try:
             result = ("ok", fn())
@@ -145,12 +145,12 @@ def info(parent, text, kind=Gtk.MessageType.INFO):
 
 
 # --------------------------------------------------------------------------
-#  Finestra principale
+#  Main window
 # --------------------------------------------------------------------------
 class IconsPacketWindow(Gtk.Window):
     def __init__(self):
         super().__init__(title=APP_NAME)
-        # WM_CLASS: la barra applicazioni la usa per trovare icons-packet.desktop
+        # WM_CLASS: the panel uses it to find icons-packet.desktop
         self.set_wmclass("icons-packet", "Icons-Packet")
         self.set_default_size(720, 540)
         self.set_position(Gtk.WindowPosition.CENTER)
@@ -162,10 +162,10 @@ class IconsPacketWindow(Gtk.Window):
         self.add(self.stack)
 
         self.stack.add_named(self._build_dashboard(), "dashboard")
-        # una pagina-elenco per gruppo, e un pannello per azione, su richiesta
+        # one list page per group, and one panel per action, on demand
         self._group_pages = {}
         self._panels = {}
-        # ricorda in quale gruppo si trova ogni azione, per il tasto Indietro
+        # remember which group each action belongs to, for the Back button
         self._action_group = {
             action_id: gi
             for gi, (_title, actions) in enumerate(ACTION_GROUPS)
@@ -175,7 +175,7 @@ class IconsPacketWindow(Gtk.Window):
         self.show_all()
 
     def _set_window_icon(self):
-        """Imposta l'icona della finestra dal file incluso in icon/."""
+        """Set the window icon from the file shipped in icon/."""
         here = Path(__file__).resolve().parent
         for name in ("icon/icons-packet-256.png", "icon/icons-packet.svg",
                      "icon/icons-packet-128.png"):
@@ -188,11 +188,11 @@ class IconsPacketWindow(Gtk.Window):
                     continue
 
     def _safe_icon(self, name, size, fallback="image-x-generic-symbolic"):
-        """Restituisce un Gtk.Image per `name` SOLO se il tema icona attivo
-        lo possiede davvero; altrimenti usa `fallback` (che, se manca pure
-        quello, ripiega ancora su 'image-missing' — mai un triangolo rotto
-        senza motivo). Evita l'icona generica sbagliata quando il tema
-        icona del sistema non contiene un nome che avevamo dato per scontato.
+        """Return a Gtk.Image for `name` ONLY if the active icon theme
+        really has it; otherwise use `fallback` (and if that is missing
+        too, fall back again to 'image-missing' — never a broken triangle
+        for no reason). Avoids the wrong generic icon when the system icon
+        theme lacks a name we had taken for granted.
         """
         theme = Gtk.IconTheme.get_default()
         chosen = name if theme.has_icon(name) else fallback
@@ -200,7 +200,7 @@ class IconsPacketWindow(Gtk.Window):
             chosen = "image-missing"
         return Gtk.Image.new_from_icon_name(chosen, size)
 
-    # ---- barra del titolo con menu in alto a sinistra ----
+    # ---- title bar with the menu at the top left ----
     def _build_header_bar(self):
         header = Gtk.HeaderBar()
         header.set_show_close_button(True)
@@ -224,7 +224,7 @@ class IconsPacketWindow(Gtk.Window):
 
         menu.append(Gtk.SeparatorMenuItem())
 
-        # ---- sottomenu Language: le 10 lingue del README, con bandiera ----
+        # ---- Language submenu: the 10 README languages, with flags ----
         lang_item = Gtk.MenuItem.new_with_label(tr("Language"))
         lang_submenu = Gtk.Menu()
         current = get_language()
@@ -257,17 +257,17 @@ class IconsPacketWindow(Gtk.Window):
         return header
 
     def _on_language_selected(self, radio_item, code):
-        """Cambia lingua e ricostruisce le pagine così tutti i testi si
-        aggiornano subito, senza dover riavviare l'app."""
+        """Change language and rebuild the pages, so every text updates
+        right away, without restarting the app."""
         if not radio_item.get_active():
-            return  # l'evento toggled scatta due volte (off del vecchio, on del nuovo)
+            return  # the toggled event fires twice (old one off, new one on)
         set_language(code)
         self._rebuild_all_pages()
 
     def _rebuild_all_pages(self):
-        """Ricostruisce dashboard, pagine-gruppo e pannelli-azione con la
-        lingua corrente. Le pagine già aperte vengono rimosse dallo stack
-        e ricreate al prossimo utilizzo."""
+        """Rebuild dashboard, group pages and action panels in the current
+        language. Pages already open are removed from the stack and
+        recreated the next time they are used."""
         current_name = self.stack.get_visible_child_name()
 
         for name in list(self._group_pages.keys()):
@@ -284,12 +284,12 @@ class IconsPacketWindow(Gtk.Window):
         self.stack.add_named(new_dashboard, "dashboard")
         new_dashboard.show_all()
 
-        # aggiorna anche la barra del titolo (tooltip del menu, ecc.)
+        # also refresh the title bar (menu tooltip, etc.)
         new_header = self._build_header_bar()
         self.set_titlebar(new_header)
         new_header.show_all()
 
-        # torna alla dashboard se la pagina corrente non esiste più
+        # go back to the dashboard if the current page no longer exists
         if current_name and current_name != "dashboard" and \
            current_name.startswith("group-"):
             idx = int(current_name.split("-")[1])
@@ -322,8 +322,8 @@ class IconsPacketWindow(Gtk.Window):
             except Exception:
                 logo_set = False
         if not logo_set:
-            # niente pixbuf caricabile: usa un'icona di sistema sicura
-            # invece di lasciare il placeholder rotto
+            # no loadable pixbuf: use a safe system icon
+            # instead of leaving the broken placeholder
             theme = Gtk.IconTheme.get_default()
             fallback = "image-x-generic" if theme.has_icon("image-x-generic") \
                 else "image-missing"
@@ -339,16 +339,16 @@ class IconsPacketWindow(Gtk.Window):
             info(self, f"Apri manualmente:\n{WEBSITE_URL}")
 
     def _on_toggle_dark_theme(self, item):
-        """Cinnamon riapplica il tema da XSettings subito dopo che un'app
-        lo cambia a runtime (set_property), quindi la modifica veniva
-        sempre annullata all'istante. L'unico modo affidabile è imporre
-        GTK_THEME nell'ambiente PRIMA che GTK si inizializzi.
+        """Cinnamon re-applies the theme from XSettings right after an app
+        changes it at runtime (set_property), so the change was always
+        undone at once. The only reliable way is to force GTK_THEME in
+        the environment BEFORE GTK initialises.
 
-        Uso os.execvpe invece di aprire un nuovo processo e chiudere questo:
-        execvpe SOSTITUISCE il processo corrente sul posto, riusando
-        esattamente gli argomenti con cui l'app era stata avviata la prima
-        volta (sys.argv), qualunque fosse il percorso — niente ambiguità
-        su script/cartella, niente corsa tra "chiudi" e "riapri".
+        I use os.execvpe instead of opening a new process and closing this one:
+        execvpe REPLACES the current process in place, reusing exactly the
+        arguments the app was first started with (sys.argv), whatever the
+        path — no ambiguity about script/folder, no race between "close"
+        and "reopen".
         """
         want_dark = item.get_active()
         theme_name = "Mint-Y-Dark" if want_dark else "Mint-Y"
@@ -358,7 +358,7 @@ class IconsPacketWindow(Gtk.Window):
 
         os.execvpe(sys.executable, [sys.executable] + sys.argv, env)
 
-    # ---- dashboard: solo i 5 pulsanti dei gruppi ----
+    # ---- dashboard: only the 5 group buttons ----
     def _build_dashboard(self):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
 
@@ -389,7 +389,7 @@ class IconsPacketWindow(Gtk.Window):
         scroll.add(groups_box)
         box.pack_start(scroll, True, True, 0)
 
-        # footer con tema attivo
+        # footer with the active theme
         footer = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         footer.set_margin_start(24)
         footer.set_margin_end(24)
@@ -406,7 +406,7 @@ class IconsPacketWindow(Gtk.Window):
         return box
 
     def _group_card(self, group_index, title, n_actions):
-        """Un pulsante grande per un intero gruppo, in stile riga cliccabile."""
+        """A large button for a whole group, styled as a clickable row."""
         btn = Gtk.Button()
         row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
         row.set_margin_top(14)
@@ -434,7 +434,7 @@ class IconsPacketWindow(Gtk.Window):
         btn.connect("clicked", lambda _w: self._open_group(group_index))
         return btn
 
-    # ---- pagina di un gruppo: azioni in elenco verticale ----
+    # ---- group page: actions in a vertical list ----
     def _open_group(self, group_index):
         name = f"group-{group_index}"
         if name not in self._group_pages:
@@ -456,7 +456,7 @@ class IconsPacketWindow(Gtk.Window):
         return outer
 
     def _action_row(self, action_id, icon_name, label, desc):
-        """Una riga cliccabile dell'elenco azioni (dentro la pagina di un gruppo)."""
+        """A clickable row of the action list (inside a group page)."""
         row = Gtk.ListBoxRow()
         row.set_selectable(False)
         btn = Gtk.Button()
@@ -489,7 +489,7 @@ class IconsPacketWindow(Gtk.Window):
         row.add(btn)
         return row
 
-    # ---- navigazione ----
+    # ---- navigation ----
     def _open_panel(self, action_id):
         if action_id not in self._panels:
             panel = self._make_panel(action_id)
@@ -505,7 +505,7 @@ class IconsPacketWindow(Gtk.Window):
         self.stack.set_visible_child_name("dashboard")
 
     def _go_back_from_panel(self, action_id):
-        """Dal pannello di un'azione, torna alla pagina del suo gruppo."""
+        """From an action panel, go back to the page of its group."""
         group_index = self._action_group.get(action_id)
         if group_index is not None:
             self.stack.set_visible_child_name(f"group-{group_index}")
@@ -513,9 +513,9 @@ class IconsPacketWindow(Gtk.Window):
             self._go_home()
 
     def _panel_shell(self, title, back_target=None):
-        """Contenitore standard di un pannello: header con Indietro + area.
-        back_target: 'dashboard' o un action_id (per tornare al gruppo che
-        lo contiene). Se None, va calcolato dal chiamante dei pannelli-azione.
+        """Standard panel container: header with Back + content area.
+        back_target: 'dashboard' or an action_id (to go back to the group
+        that holds it). If None, the caller of the action panels works it out.
         """
         outer = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
@@ -526,7 +526,7 @@ class IconsPacketWindow(Gtk.Window):
         if back_target == "dashboard":
             back.connect("clicked", lambda _w: self._go_home())
         else:
-            # back_target è l'action_id del pannello stesso: torna al suo gruppo
+            # back_target is the action_id of the panel itself: go back to its group
             back.connect("clicked",
                         lambda _w: self._go_back_from_panel(back_target))
         bar.pack_start(back, False, False, 0)
@@ -543,7 +543,7 @@ class IconsPacketWindow(Gtk.Window):
         outer.pack_start(inner, True, True, 0)
         return outer, inner
 
-    # ---- pannelli specifici ----
+    # ---- specific panels ----
     def _make_panel(self, action_id):
         builder = {
             "extract": self._panel_extract,
@@ -620,7 +620,7 @@ class IconsPacketWindow(Gtk.Window):
         outer, inner = self._panel_shell(tr("Create / update theme"), back_target="build")
         status = self._status_label()
 
-        # sorgente
+        # source
         src_row = Gtk.Box(spacing=8)
         src_lbl = Gtk.Label(label=tr("Icon source: (none)"))
         src_lbl.set_halign(Gtk.Align.START)
@@ -637,7 +637,7 @@ class IconsPacketWindow(Gtk.Window):
         src_row.pack_start(src_btn, False, False, 0)
         inner.pack_start(src_row, False, False, 0)
 
-        # nome tema
+        # theme name
         name_row = Gtk.Box(spacing=8)
         name_row.pack_start(Gtk.Label(label=tr("Theme name:")), False, False, 0)
         name_entry = Gtk.Entry()
@@ -696,7 +696,7 @@ class IconsPacketWindow(Gtk.Window):
         build_btn.connect("clicked", on_build)
         inner.pack_start(build_btn, False, False, 0)
 
-        # attiva
+        # activate
         def on_activate(_w):
             tname = core.clean_name(name_entry.get_text())
             if core.set_active_theme(tname):
@@ -907,7 +907,7 @@ class IconsPacketWindow(Gtk.Window):
         desc.set_halign(Gtk.Align.START)
         inner.pack_start(desc, False, False, 0)
 
-        # menu a tendina con le caselle di sistema
+        # drop-down menu with the system slots
         slot_row = Gtk.Box(spacing=8)
         slot_row.pack_start(Gtk.Label(label=tr("Slot:")), False, False, 0)
         slot_combo = Gtk.ComboBoxText()
@@ -918,7 +918,7 @@ class IconsPacketWindow(Gtk.Window):
         slot_row.pack_start(slot_combo, True, True, 0)
         inner.pack_start(slot_row, False, False, 0)
 
-        # immagine scelta
+        # chosen image
         self._sys_image = None
         img_row = Gtk.Box(spacing=8)
         img_lbl = Gtk.Label(label=tr("Image: (none)"))
@@ -980,7 +980,7 @@ class IconsPacketWindow(Gtk.Window):
         inner.pack_start(status, False, False, 0)
         return outer
 
-    # ===== Helpers per i pannelli "azione sul tema" =====
+    # ===== Helpers for the "action on the theme" panels =====
     def _theme_or_warn(self):
         theme = core.ICONS_DIR / "byBias-Icons"
         if not theme.is_dir():
@@ -989,7 +989,7 @@ class IconsPacketWindow(Gtk.Window):
             return None
         return theme
 
-    # ---- Manutenzione ----
+    # ---- Maintenance ----
     def _panel_duplicates(self):
         outer, inner = self._panel_shell(tr("Find duplicates (by content)"), back_target="duplicates")
         status = self._status_label()
@@ -1112,7 +1112,7 @@ class IconsPacketWindow(Gtk.Window):
         inner.pack_start(status, False, False, 0)
         return outer
 
-    # ---- Produzione ----
+    # ---- Production ----
     def _panel_sizes(self):
         outer, inner = self._panel_shell(tr("Normalize sizes (16 → 256)"), back_target="sizes")
         status = self._status_label()
@@ -1250,7 +1250,7 @@ class IconsPacketWindow(Gtk.Window):
         inner.pack_start(status, False, False, 0)
         return outer
 
-    # ---- Distribuzione ----
+    # ---- Distribution ----
     def _panel_export(self):
         outer, inner = self._panel_shell(tr("Export theme package"), back_target="export")
         status = self._status_label()
@@ -1317,7 +1317,7 @@ class IconsPacketWindow(Gtk.Window):
         inner.pack_start(status, False, False, 0)
         return outer
 
-    # ---- Sicurezza & comodità ----
+    # ---- Safety & convenience ----
     def _panel_backup(self):
         outer, inner = self._panel_shell(tr("Backup / restore"), back_target="backup")
         status = self._status_label()
@@ -1401,9 +1401,9 @@ class IconsPacketWindow(Gtk.Window):
 
 
 def _load_css():
-    """Applica un CSS con priorità APPLICATION: batte le regole del tema
-    GTK attivo per la classe .ip-dim, che il markup Pango foreground=
-    da solo non riusciva a sovrastare (il tema le sovrascriveva)."""
+    """Apply a CSS with APPLICATION priority: it beats the rules of the
+    active GTK theme for the .ip-dim class, which Pango foreground=
+    markup alone could not override (the theme overwrote it)."""
     css = b"""
     .ip-dim {
         color: #aaaaaa;
@@ -1418,13 +1418,13 @@ def _load_css():
 
 def main():
     _load_css()
-    # WM_CLASS deve combaciare col nome del file .desktop (icons-packet.desktop)
-    # perché la barra applicazioni di Cinnamon associ l'icona corretta.
+    # WM_CLASS must match the name of the .desktop file (icons-packet.desktop)
+    # so that the Cinnamon panel associates the right icon.
     GLib.set_prgname("icons-packet")
     GLib.set_application_name(APP_NAME)
 
-    # icona di default per TUTTE le finestre dell'app (usata anche
-    # nell'alt-tab e come fallback dalla barra)
+    # default icon for ALL the app's windows (also used
+    # in alt-tab and as fallback by the panel)
     here = Path(__file__).resolve().parent
     for name in ("icon/icons-packet-256.png", "icon/icons-packet.svg"):
         p = here / name

@@ -11,11 +11,11 @@
 ##########################################################
 # SPDX-License-Identifier: MIT
 """
-icons_packet_core.py — logica pura di Icons-Packet 📦🦉
+icons_packet_core.py — pure logic of Icons-Packet 📦🦉
 
-Nessuna dipendenza da GTK: tutte le operazioni sulle icone e sul tema
-vivono qui, così sono testabili e riutilizzabili. La GUI (icons_packet_gui.py)
-chiama solo queste funzioni.
+No GTK dependency: every operation on icons and themes lives here, so
+it can be tested and reused. The GUI (icons_packet_gui.py) only calls
+these functions.
 
 by Franz & Aldus
 """
@@ -28,7 +28,7 @@ import unicodedata
 from pathlib import Path
 
 # --------------------------------------------------------------------------
-#  Costanti condivise
+#  Shared constants
 # --------------------------------------------------------------------------
 ICONS_DIR = Path.home() / ".local/share/icons"
 EXTENSIONS = (".png", ".svg", ".xpm")
@@ -36,24 +36,24 @@ GREY = "#bebebe"
 PREFIX = "bybias-"
 PNG_SIG = b"\x89PNG\r\n\x1a\n"
 
-# I 10 Context standard riconosciuti dal selettore di Mint
+# The 10 standard Contexts recognised by the Mint icon chooser
 STANDARD_CONTEXTS = ("Actions", "Applications", "Categories", "Devices",
                      "Emblems", "Emotes", "MimeTypes", "Places", "Status",
                      "Panel")
 
 
 # --------------------------------------------------------------------------
-#  Utilità sui nomi (convenzione: solo trattini)
+#  Name helpers (convention: hyphens only)
 # --------------------------------------------------------------------------
 def to_hyphens(name: str) -> str:
-    """Spazi e underscore → trattino singolo. La convenzione della suite."""
+    """Spaces and underscores → a single hyphen. The suite convention."""
     name = name.replace(" ", "-").replace("_", "-")
     name = re.sub(r"-+", "-", name)
     return name.strip("-") or "noname"
 
 
 def strip_accents(name: str) -> str:
-    """Rimuove accenti/caratteri non-ASCII che invalidano la cache GTK."""
+    """Remove accents/non-ASCII characters that break the GTK cache."""
     decomposed = unicodedata.normalize("NFKD", name)
     ascii_name = "".join(c for c in decomposed
                          if ord(c) < 128 and not unicodedata.combining(c))
@@ -61,19 +61,19 @@ def strip_accents(name: str) -> str:
 
 
 def clean_name(name: str) -> str:
-    """Bonifica completa: niente accenti, solo trattini."""
+    """Full clean-up: no accents, hyphens only."""
     return to_hyphens(strip_accents(name))
 
 
 def category_label(folder: str) -> str:
-    """'5-EMAIL-e-POSTA' → 'Email e Posta' per la barra laterale."""
+    """'5-EMAIL-e-POSTA' → 'Email e Posta' for the sidebar."""
     label = re.sub(r"^\d+[-_]*", "", folder)
     label = label.replace("-", " ").replace("_", " ").strip()
     return label.title() if label else folder
 
 
 def map_context(folder_name: str) -> str:
-    """Mappa il nome di una cartella su uno dei 10 Context standard."""
+    """Map a folder name onto one of the 10 standard Contexts."""
     n = folder_name.upper()
     if any(k in n for k in ("FOLDER", "CARTELLE", "TRASH", "CESTIN",
                             "DESKTOP", "HOME", "DOWNLOAD", "PLACES")):
@@ -94,10 +94,10 @@ def map_context(folder_name: str) -> str:
 
 
 # --------------------------------------------------------------------------
-#  Scansione icone
+#  Icon scanning
 # --------------------------------------------------------------------------
 def collect_icons(path):
-    """Tutti i file icona sotto path, ricorsivamente."""
+    """All icon files under path, recursively."""
     path = Path(path)
     out = []
     for root, _dirs, files in os.walk(path):
@@ -112,7 +112,7 @@ def count_icons(path):
 
 
 def list_themes():
-    """Temi presenti in ~/.local/share/icons (esclusi default/cache)."""
+    """Themes found in ~/.local/share/icons (default/cache excluded)."""
     if not ICONS_DIR.is_dir():
         return []
     out = []
@@ -124,17 +124,17 @@ def list_themes():
 
 
 # --------------------------------------------------------------------------
-#  1. ESTRAZIONE da .ico / .exe / .dll / .icl
+#  1. EXTRACTION from .ico / .exe / .dll / .icl
 # --------------------------------------------------------------------------
 def _stride(bits, w):
     return ((w * bits + 31) // 32) * 4
 
 
 def read_dib_to_img(data):
-    """Ricostruisce un'immagine RGBA da una risorsa DIB grezza (RT_ICON).
+    """Rebuild an RGBA image from a raw DIB resource (RT_ICON).
 
-    Ritorna un PIL.Image o None. Import di PIL locale così il core
-    resta importabile anche dove PIL manca (la GUI lo richiede comunque).
+    Returns a PIL.Image or None. PIL is imported locally so the core
+    stays importable where PIL is missing (the GUI requires it anyway).
     """
     from PIL import Image
     if len(data) < 40:
@@ -236,10 +236,10 @@ def read_dib_to_img(data):
 
 
 def extract_from_file(src_file, out_root="extracted", progress=None):
-    """Estrae le icone da un file .ico/.exe/.dll/.icl.
+    """Extract the icons from a .ico/.exe/.dll/.icl file.
 
-    Richiede wrestool (pacchetto icoutils). Ritorna un dict con conteggi.
-    `progress` opzionale: callback(str) per messaggi di avanzamento.
+    Requires wrestool (icoutils package). Returns a dict with counts.
+    `progress` is optional: callback(str) for progress messages.
     """
     from PIL import Image
     src_file = Path(src_file)
@@ -282,7 +282,7 @@ def wrestool_available():
 
 
 # --------------------------------------------------------------------------
-#  2. ICONE SIMBOLICHE (PNG → SVG 16×16 monocromatico)
+#  2. SYMBOLIC ICONS (PNG → monochrome 16×16 SVG)
 # --------------------------------------------------------------------------
 def _mask(img, alpha_thr=64, white_thr=242):
     img = img.convert("RGBA")
@@ -346,7 +346,7 @@ def _cells_to_svg(cells, grid):
 
 
 def make_symbolic(png_path, out_dir=None, grid=16, coverage=0.42):
-    """Genera l'SVG simbolico da un PNG. Ritorna il percorso o None."""
+    """Generate the symbolic SVG from a PNG. Returns the path or None."""
     from PIL import Image
     png_path = Path(png_path)
     name = clean_name(png_path.stem) + "-symbolic"
@@ -364,15 +364,15 @@ def make_symbolic(png_path, out_dir=None, grid=16, coverage=0.42):
 
 
 # --------------------------------------------------------------------------
-#  3. COSTRUZIONE TEMA (index.theme + cache)
+#  3. THEME BUILDING (index.theme + cache)
 # --------------------------------------------------------------------------
 def normalize_names(theme_dir):
-    """Rinomina in-place file e cartelle: accenti via, spazi/underscore→-.
-    Ritorna il numero di elementi rinominati.
+    """Rename files and folders in place: accents removed, spaces/underscores→-.
+    Returns the number of renamed items.
     """
     theme_dir = Path(theme_dir)
     n = 0
-    # bottom-up per rinominare prima i file, poi le cartelle
+    # bottom-up, so files are renamed before their folders
     for root, dirs, files in os.walk(theme_dir, topdown=False):
         for entry in files + dirs:
             new = clean_name(Path(entry).stem)
@@ -391,8 +391,8 @@ def normalize_names(theme_dir):
 
 
 def build_index(theme_dir, theme_name=None, inherits="Mint-Y"):
-    """Genera index.theme scansionando le sottocartelle con icone.
-    Ritorna il numero di cartelle incluse.
+    """Generate index.theme by scanning the sub-folders that hold icons.
+    Returns the number of folders included.
     """
     theme_dir = Path(theme_dir)
     theme_name = theme_name or theme_dir.name
@@ -414,7 +414,7 @@ def build_index(theme_dir, theme_name=None, inherits="Mint-Y"):
 
 
 def update_cache(theme_dir):
-    """Rigenera la cache. Ritorna (ok: bool, message: str)."""
+    """Rebuild the cache. Returns (ok: bool, message: str)."""
     theme_dir = Path(theme_dir)
     cache = theme_dir / "icon-theme.cache"
     if cache.exists():
@@ -427,7 +427,7 @@ def update_cache(theme_dir):
 
 
 # --------------------------------------------------------------------------
-#  4. ANTI-COLLISIONI (giganti)
+#  4. ANTI-COLLISIONS (giants)
 # --------------------------------------------------------------------------
 def _system_vocabulary(exclude_dir):
     exclude = os.path.abspath(exclude_dir)
@@ -456,7 +456,7 @@ def _stem(filename):
 
 
 def find_collisions(theme_dir, prefix=PREFIX, allowed=None):
-    """Elenca i file che scippano nomi di sistema. Ritorna lista di path."""
+    """List the files that hijack system names. Returns a list of paths."""
     theme_dir = os.path.abspath(theme_dir)
     allowed = allowed or set()
     vocab = _system_vocabulary(theme_dir)
@@ -472,7 +472,7 @@ def find_collisions(theme_dir, prefix=PREFIX, allowed=None):
 
 
 def defuse_collisions(collisions, prefix=PREFIX):
-    """Rinomina i file in collisione col prefisso. Ritorna il conteggio."""
+    """Rename the colliding files with the prefix. Returns the count."""
     n = 0
     for c in collisions:
         folder, name = os.path.split(c)
@@ -488,7 +488,7 @@ def defuse_collisions(collisions, prefix=PREFIX):
 
 
 def prefix_all(theme_dir, prefix=PREFIX):
-    """Prefissa TUTTE le icone non già prefissate. Ritorna il conteggio."""
+    """Prefix ALL icons not prefixed yet. Returns the count."""
     theme_dir = Path(theme_dir)
     n = 0
     files = [p for p in theme_dir.rglob("*")
@@ -507,7 +507,7 @@ def prefix_all(theme_dir, prefix=PREFIX):
 
 
 # --------------------------------------------------------------------------
-#  5. ATTIVAZIONE TEMA
+#  5. THEME ACTIVATION
 # --------------------------------------------------------------------------
 def get_active_theme():
     r = subprocess.run(["gsettings", "get",
@@ -523,7 +523,7 @@ def set_active_theme(theme_name):
 
 
 def apply_icon_to(target, icon_path):
-    """Applica un'icona a un file/cartella via gio metadata."""
+    """Apply an icon to a file/folder via gio metadata."""
     uri = icon_path if icon_path.startswith("file://") else "file://" + icon_path
     return subprocess.run(["gio", "set", target,
                            "metadata::custom-icon", uri],
@@ -531,11 +531,11 @@ def apply_icon_to(target, icon_path):
 
 
 # --------------------------------------------------------------------------
-#  6. SOSTITUZIONE ICONE DI SISTEMA (cestino pieno/vuoto, cartelle, ecc.)
+#  6. REPLACING SYSTEM ICONS (full/empty trash, folders, etc.)
 # --------------------------------------------------------------------------
-# Catalogo delle "caselle" di sistema più utili: (nome_standard, etichetta).
-# Installando un tuo PNG/SVG con quel nome nel tema, sostituisci l'icona
-# di sistema ovunque compaia (pannello, Nemo, menu...).
+# Catalog of the most useful system "slots": (standard_name, label).
+# Installing your own PNG/SVG under that name in the theme replaces the
+# system icon everywhere it appears (panel, Nemo, menu...).
 SYSTEM_SLOTS = [
     ("user-trash",          "Cestino vuoto"),
     ("user-trash-full",     "Cestino pieno"),
@@ -558,12 +558,12 @@ SYSTEM_SLOTS = [
 
 
 def install_system_icon(theme_dir, slot_name, source_image, category="places"):
-    """Installa `source_image` nel tema col nome standard `slot_name`, così
-    sostituisce l'icona di sistema corrispondente.
+    """Install `source_image` in the theme under the standard name `slot_name`,
+    so it replaces the matching system icon.
 
-    L'icona viene messa in una sottocartella dedicata (default 'places') e
-    conserva l'estensione originale (.png/.svg). Ritorna il percorso creato.
-    NON prefissa il nome (deve restare quello standard per fare effetto).
+    The icon goes into a dedicated sub-folder (default 'places') and keeps
+    its original extension (.png/.svg). Returns the created path.
+    It does NOT prefix the name (it must stay standard to take effect).
     """
     theme_dir = Path(theme_dir)
     ext = Path(source_image).suffix.lower()
@@ -578,16 +578,16 @@ def install_system_icon(theme_dir, slot_name, source_image, category="places"):
 
 
 def system_slots():
-    """Ritorna la lista delle caselle di sistema disponibili."""
+    """Return the list of available system slots."""
     return list(SYSTEM_SLOTS)
 
 
 # ==========================================================================
-#  GRUPPO A — MANUTENZIONE (cura della collezione)
+#  GROUP A — MAINTENANCE (looking after the collection)
 # ==========================================================================
 def find_duplicates(theme_dir, progress=None):
-    """Trova icone identiche per CONTENUTO (hash del file), non per nome.
-    Ritorna una lista di gruppi: ogni gruppo è la lista di path identici.
+    """Find icons that are identical by CONTENT (file hash), not by name.
+    Returns a list of groups: each group is the list of identical paths.
     """
     import hashlib
     theme_dir = Path(theme_dir)
@@ -603,8 +603,8 @@ def find_duplicates(theme_dir, progress=None):
 
 
 def remove_duplicates(groups, keep="first"):
-    """Rimuove i doppioni tenendo un file per gruppo. Ritorna quanti rimossi.
-    keep='first' tiene il primo (ordine alfabetico), rimuove gli altri.
+    """Remove duplicates, keeping one file per group. Returns how many were removed.
+    keep='first' keeps the first one (alphabetical order), removes the others.
     """
     removed = 0
     for group in groups:
@@ -620,8 +620,8 @@ def remove_duplicates(groups, keep="first"):
 
 
 def contact_sheet(theme_dir, out_path, cols=8, thumb=64, label=True):
-    """Genera un mosaico PNG di tutta la collezione, con nome sotto ogni icona.
-    Ritorna (percorso, numero_icone).
+    """Generate a PNG mosaic of the whole collection, with a name under each icon.
+    Returns (path, icon_count).
     """
     from PIL import Image, ImageDraw, ImageFont
     theme_dir = Path(theme_dir)
@@ -661,7 +661,7 @@ def contact_sheet(theme_dir, out_path, cols=8, thumb=64, label=True):
 
 
 def _dominant_color(img, size=16):
-    """Colore medio (RGB) dei pixel non trasparenti, campionato a bassa risoluzione."""
+    """Average colour (RGB) of the non-transparent pixels, sampled at low resolution."""
     small = img.convert("RGBA").resize((size, size))
     px = small.load()
     rs = gs = bs = n = 0
@@ -676,8 +676,8 @@ def _dominant_color(img, size=16):
 
 
 def find_similar(reference_png, theme_dir, top=12):
-    """Trova le icone graficamente più simili al riferimento, per colore
-    dominante. Ritorna lista di (path, distanza) ordinata dalla più simile.
+    """Find the icons that look most like the reference, by dominant
+    colour. Returns a list of (path, distance), most similar first.
     """
     from PIL import Image
     ref = _dominant_color(Image.open(reference_png))
@@ -696,14 +696,14 @@ def find_similar(reference_png, theme_dir, top=12):
 
 
 # ==========================================================================
-#  GRUPPO B — PRODUZIONE (creare/rifinire icone)
+#  GROUP B — PRODUCTION (creating/finishing icons)
 # ==========================================================================
 STANDARD_SIZES = (16, 24, 32, 48, 64, 128, 256)
 
 
 def normalize_sizes(png_path, out_dir=None, sizes=STANDARD_SIZES):
-    """Da un PNG (spesso sovradimensionato) genera il set completo di taglie,
-    ridimensionato con qualità. Ritorna la lista dei percorsi creati.
+    """From a (often oversized) PNG, generate the full set of sizes,
+    resized with quality. Returns the list of created paths.
     """
     from PIL import Image
     png_path = Path(png_path)
@@ -720,8 +720,8 @@ def normalize_sizes(png_path, out_dir=None, sizes=STANDARD_SIZES):
 
 
 def recolor(png_path, target_hex, out_path=None):
-    """Ricolora un'icona (utile per le monocromatiche): sostituisce la tinta
-    mantenendo l'alpha. target_hex tipo '#3b82f6'. Ritorna il percorso.
+    """Recolour an icon (handy for monochrome ones): replaces the tint
+    keeping the alpha. target_hex like '#3b82f6'. Returns the path.
     """
     from PIL import Image
     png_path = Path(png_path)
@@ -743,7 +743,7 @@ def recolor(png_path, target_hex, out_path=None):
 
 
 def invert_light_dark(png_path, out_path=None):
-    """Inverte chiaro↔scuro mantenendo l'alpha (per adattare a temi opposti)."""
+    """Swap light↔dark keeping the alpha (to fit opposite themes)."""
     from PIL import Image
     png_path = Path(png_path)
     img = Image.open(png_path).convert("RGBA")
@@ -760,8 +760,8 @@ def invert_light_dark(png_path, out_path=None):
 
 
 def trim_and_pad(png_path, out_path=None, pad_ratio=0.08):
-    """Rifila i margini trasparenti, ricentra e applica un padding uniforme.
-    pad_ratio = frazione del lato usata come margine. Ritorna il percorso.
+    """Trim the transparent margins, re-centre and apply uniform padding.
+    pad_ratio = fraction of the side used as margin. Returns the path.
     """
     from PIL import Image
     png_path = Path(png_path)
@@ -783,12 +783,12 @@ def trim_and_pad(png_path, out_path=None, pad_ratio=0.08):
 
 
 # ==========================================================================
-#  GRUPPO C — DISTRIBUZIONE (condividere)
+#  GROUP C — DISTRIBUTION (sharing)
 # ==========================================================================
 def export_theme_package(theme_dir, out_zip=None, author="Francesco",
                          license_name="MIT"):
-    """Crea uno zip pronto per la pubblicazione: tema + LICENSE + README.
-    Ritorna il percorso dello zip.
+    """Create a zip ready for publishing: theme + LICENSE + README.
+    Returns the path of the zip.
     """
     import zipfile
     theme_dir = Path(theme_dir)
@@ -815,8 +815,8 @@ def export_theme_package(theme_dir, out_zip=None, author="Francesco",
 
 
 def make_showcase(theme_dir, out_path, picks=12, bg=(40, 42, 54)):
-    """Immagine promozionale: una selezione di icone disposta con gusto su
-    uno sfondo. Ritorna (percorso, numero_icone_usate).
+    """Promo image: a selection of icons laid out with taste on a
+    background. Returns (path, number_of_icons_used).
     """
     from PIL import Image
     theme_dir = Path(theme_dir)
@@ -824,7 +824,7 @@ def make_showcase(theme_dir, out_path, picks=12, bg=(40, 42, 54)):
              if p.is_file() and p.suffix.lower() in (".png", ".xpm")]
     if not files:
         return None, 0
-    # scegli fino a `picks` icone distribuite lungo la collezione
+    # pick up to `picks` icons spread across the collection
     step = max(1, len(files) // picks)
     chosen = files[::step][:picks]
     cols = min(len(chosen), 4)
@@ -851,10 +851,10 @@ def make_showcase(theme_dir, out_path, picks=12, bg=(40, 42, 54)):
 
 
 # ==========================================================================
-#  GRUPPO D — SICUREZZA & COMODITÀ (per tutti)
+#  GROUP D — SAFETY & CONVENIENCE (for everyone)
 # ==========================================================================
 def backup_theme(theme_dir, backup_root=None):
-    """Snapshot compresso del tema, con timestamp. Ritorna il percorso.
+    """Compressed, timestamped snapshot of the theme. Returns the path.
     """
     import zipfile
     import datetime
@@ -872,7 +872,7 @@ def backup_theme(theme_dir, backup_root=None):
 
 
 def list_backups(theme_name, backup_root=None):
-    """Elenca i backup disponibili per un tema, dal più recente."""
+    """List the available backups of a theme, newest first."""
     backup_root = Path(backup_root) if backup_root else \
         Path.home() / ".local/share/icons-packet-backups"
     if not backup_root.is_dir():
@@ -882,7 +882,7 @@ def list_backups(theme_name, backup_root=None):
 
 
 def restore_backup(zip_path, theme_dir):
-    """Ripristina un tema da un backup (sovrascrive). Ritorna True."""
+    """Restore a theme from a backup (overwrites). Returns True."""
     import zipfile
     import shutil
     theme_dir = Path(theme_dir)
@@ -895,13 +895,13 @@ def restore_backup(zip_path, theme_dir):
 
 
 def health_check(theme_dir):
-    """Diagnostica il tema secondo la checklist della FAQ.
-    Ritorna una lista di (esito, messaggio): esito è 'ok' | 'warn' | 'err'.
+    """Diagnose the theme against the FAQ checklist.
+    Returns a list of (result, message): result is 'ok' | 'warn' | 'err'.
     """
     theme_dir = Path(theme_dir)
     report = []
 
-    # 1. index.theme esiste?
+    # 1. does index.theme exist?
     idx = theme_dir / "index.theme"
     if not idx.is_file():
         report.append(("err", "Manca index.theme: il tema è invisibile al sistema."))
@@ -910,7 +910,7 @@ def health_check(theme_dir):
 
     text = idx.read_text(errors="ignore")
 
-    # 2. Inherits da tema completo?
+    # 2. inherits from a complete theme?
     inh = None
     for line in text.splitlines():
         if line.startswith("Inherits="):
@@ -925,7 +925,7 @@ def health_check(theme_dir):
         report.append(("warn", f"Inherits='{inh}': verifica che sia un tema COMPLETO "
                                "(le varianti colorate come Mint-X-Red danno triangoli)."))
 
-    # 3. accenti nei nomi?
+    # 3. accents in the names?
     accented = [str(p.relative_to(theme_dir)) for p in theme_dir.rglob("*")
                 if any(ord(c) > 127 for c in p.name)]
     if accented:
@@ -934,7 +934,7 @@ def health_check(theme_dir):
     else:
         report.append(("ok", "Nessun accento nei nomi."))
 
-    # 4. spazi/underscore?
+    # 4. spaces/underscores?
     dirty = [p for p in theme_dir.rglob("*")
              if " " in p.name or "_" in p.name]
     if dirty:
@@ -943,7 +943,7 @@ def health_check(theme_dir):
     else:
         report.append(("ok", "Nomi conformi (solo trattini)."))
 
-    # 5. collisioni con icone di sistema?
+    # 5. collisions with system icons?
     cols = find_collisions(str(theme_dir))
     if cols:
         report.append(("warn", f"{len(cols)} collisioni di nome con icone di "
@@ -951,7 +951,7 @@ def health_check(theme_dir):
     else:
         report.append(("ok", "Nessuna collisione con icone di sistema."))
 
-    # 6. cache presente e valida?
+    # 6. cache present and valid?
     cache = theme_dir / "icon-theme.cache"
     if not cache.is_file():
         report.append(("warn", "Cache assente (non grave: il tema funziona comunque)."))
@@ -962,7 +962,7 @@ def health_check(theme_dir):
 
 
 if __name__ == "__main__":
-    # smoke test minimo delle funzioni pure
+    # minimal smoke test of the pure functions
     print("to_hyphens('My Icon_set'):", to_hyphens("My Icon_set"))
     print("strip_accents('icòna'):", strip_accents("icòna"))
     print("category_label('5-EMAIL-e-POSTA'):", category_label("5-EMAIL-e-POSTA"))

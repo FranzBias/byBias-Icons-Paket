@@ -11,23 +11,23 @@
 ##########################################################
 # SPDX-License-Identifier: MIT
 """
-icons-packet — launcher di Icons-Packet 📦🦉
+icons-packet — launcher of Icons-Packet 📦🦉
 
-Alla prima esecuzione controlla le dipendenze. Se ne mancano, le elenca
-e — solo dopo il tuo consenso esplicito — le installa in modo trasparente,
-usando l'autenticazione grafica di sistema (pkexec) o sudo nel terminale.
-Lo script non tocca né memorizza mai la tua password: la gestisce il
-sistema, come per qualsiasi installazione.
+On first run it checks the dependencies. If some are missing, it lists
+them and — only after your explicit consent — installs them openly,
+using the system graphical authentication (pkexec) or sudo in the terminal.
+The script never touches or stores your password: the system handles
+it, as for any installation.
 """
 
 import shutil
 import subprocess
 import sys
 
-# Dipendenze: (nome leggibile, pacchetto apt, test)
-#   test "py:MOD"      -> modulo Python importabile
+# Dependencies: (readable name, apt package, test)
+#   test "py:MOD"      -> importable Python module
 #   test "gi:NS:VER"   -> namespace GObject-Introspection
-#   test "bin:EXE"     -> eseguibile nel PATH
+#   test "bin:EXE"     -> executable in PATH
 DEPENDENCIES = [
     ("gi",       "python3-gi",       "py:gi"),
     ("Gtk 3.0",  "gir1.2-gtk-3.0",   "gi:Gtk:3.0"),
@@ -38,7 +38,7 @@ DEPENDENCIES = [
 
 
 def is_available(test: str) -> bool:
-    """Verifica una singola dipendenza secondo il suo tipo."""
+    """Check a single dependency according to its type."""
     try:
         if test.startswith("py:"):
             __import__(test.split(":", 1)[1])
@@ -57,7 +57,7 @@ def is_available(test: str) -> bool:
 
 
 def missing_packages():
-    """Ritorna la lista (senza duplicati) dei pacchetti apt mancanti."""
+    """Return the list (without duplicates) of the missing apt packages."""
     seen, out = set(), []
     for _name, pkg, test in DEPENDENCIES:
         if not is_available(test) and pkg not in seen:
@@ -67,7 +67,7 @@ def missing_packages():
 
 
 def ask_console(pkgs):
-    """Chiede conferma da terminale. True se l'utente acconsente."""
+    """Ask for confirmation in the terminal. True if the user agrees."""
     print("\nIcons-Packet ha bisogno di alcuni pacchetti di sistema:")
     for p in pkgs:
         print(f"  \u2022 {p}")
@@ -81,8 +81,8 @@ def ask_console(pkgs):
 
 
 def ask_graphical(pkgs):
-    """Conferma con finestra Zenity, se disponibile.
-    True (procedi) / False (rifiutato) / None (Zenity assente)."""
+    """Confirm with a Zenity window, if available.
+    True (go ahead) / False (refused) / None (no Zenity)."""
     if not shutil.which("zenity"):
         return None
     text = ("Icons-Packet ha bisogno di alcuni pacchetti di sistema:\n\n"
@@ -95,8 +95,8 @@ def ask_graphical(pkgs):
 
 
 def install(pkgs):
-    """Installa i pacchetti in modo trasparente. Preferisce pkexec
-    (dialogo grafico di sistema), poi sudo. True se riuscito."""
+    """Install the packages openly. Prefers pkexec
+    (system graphical dialog), then sudo. True if it worked."""
     apt_install = ["apt-get", "install", "-y", *pkgs]
 
     if shutil.which("pkexec"):
@@ -117,8 +117,8 @@ def install(pkgs):
 
 
 def ensure_dependencies():
-    """Controlla e, con consenso, installa le dipendenze mancanti.
-    True se alla fine \u00e8 tutto a posto."""
+    """Check and, with consent, install the missing dependencies.
+    True if everything is fine in the end."""
     pkgs = missing_packages()
     if not pkgs:
         return True
@@ -146,7 +146,7 @@ def ensure_dependencies():
 def main():
     if not ensure_dependencies():
         sys.exit(1)
-    # a questo punto le dipendenze grafiche ci sono di sicuro
+    # at this point the graphical dependencies are surely there
     from icons_packet_gui import main as gui_main
     gui_main()
 
