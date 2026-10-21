@@ -1,18 +1,17 @@
-# Icons-Packet 📦
+# byBias-Icons-Packet 📦
+![Python](https://img.shields.io/badge/python-3.10%2B-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Author](https://img.shields.io/badge/made%20with-%E2%9D%A4%EF%B8%8F%20by%20Francesco-blueviolet)
 
-![Python](https://img.shields.io/badge/python-3.10%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Author](https://img.shields.io/badge/made%20with-%E2%9D%A4%EF%B8%8F%20by%20Francesco-blueviolet)
+![byBias-Icons-Packet icon](icons-packet.svg)
 
+---
 **A unified GTK app for managing a personal icon collection on Linux Mint / Cinnamon.**
 
 🇬🇧 [English](#english) · 🇮🇹 [Italiano](#italiano) · 🇩🇪 [Deutsch](#deutsch) · 🇪🇸 [Español](#español) · 🇫🇷 [Français](#français) · 🇳🇱 [Nederlands](#nederlands) · 🇷🇺 [Русский](#русский) · 🇸🇦 [العربية](#العربية) · 🇨🇳 [中文](#中文) · 🇯🇵 [日本語](#日本語)
 
 ---
-
 ## English
 
-Icons-Packet gathers the whole byBias icon toolkit into a single GTK3 app. The
+**byBias-Icons-Packet** gathers the whole byBias icon toolkit into a single GTK3 app. The
 main window is a dashboard: every action is a visible card, and clicking one
 opens its panel in the same window.
 
@@ -41,16 +40,12 @@ A menu at the top-left of the window (☰) gives quick access to **About**, the 
 ```bash
 sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
 ```
-On first run, if any dependency is missing, Icons-Packet detects it, lists
-what's needed, asks for your consent, and installs it via the system's
-graphical authentication (pkexec) or sudo — so you can also just launch it and
-let it set itself up. Your password is handled by the system, never by the app.
+On first run, if any dependency is missing, byBias-Icons-Packet detects it, lists what's needed, asks for your consent, and installs it via the system's graphical authentication (pkexec) or sudo — so you can also just launch it and let it set itself up. Your password is handled by the system, never by the app.
 
 **Run**
 ```bash
 python3 icons-packet
 ```
-
 **Structure** — `icons_packet_core.py` holds all logic (GTK-free, testable);
 `icons_packet_gui.py` is the GTK3 dashboard; `icons-packet` is the launcher.
 
@@ -61,10 +56,7 @@ spaces or underscores; the app converts both automatically.
 
 ## Italiano
 
-Icons-Packet riunisce l'intera suite di strumenti byBias per le icone in una
-sola app GTK3. La finestra principale è una dashboard: ogni azione è un
-riquadro visibile, e cliccandone uno si apre il suo pannello nella stessa
-finestra.
+**byBias-Icons-Packet** riunisce l'intera suite di strumenti byBias per le icone in una sola app GTK3. La finestra principale è una dashboard: ogni azione è un riquadro visibile, e cliccandone uno si apre il suo pannello nella stessa finestra.
 
 **Azioni**
 - **Estrai icone** — estrae le icone da file `.ico`, `.exe`, `.dll`, `.icl` (anche rinominati), ricostruendo PNG con trasparenza.
@@ -91,17 +83,13 @@ Un menu in alto a sinistra (☰) dà accesso rapido a **Informazioni**, al **lin
 ```bash
 sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
 ```
-Al primo avvio, se manca qualche dipendenza, Icons-Packet la rileva, elenca
-cosa serve, chiede il tuo consenso e la installa tramite l'autenticazione
-grafica di sistema (pkexec) o sudo — quindi puoi anche solo lanciarlo e
-lasciare che si configuri da solo. La password la gestisce il sistema, mai
-l'app.
+Al primo avvio, se manca qualche dipendenza, byBias-Icons-Packet la rileva, elenca cosa serve, chiede il tuo consenso e la installa tramite l'autenticazione grafica di sistema (pkexec) o sudo — quindi puoi anche solo lanciarlo e
+lasciare che si configuri da solo. La password la gestisce il sistema, mai l'app.
 
 **Avvio**
 ```bash
 python3 icons-packet
 ```
-
 **Struttura** — `icons_packet_core.py` contiene tutta la logica (senza GTK,
 testabile); `icons_packet_gui.py` è la dashboard GTK3; `icons-packet` è il
 launcher.
@@ -113,8 +101,7 @@ launcher.
 
 ## Deutsch
 
-Icons-Packet vereint das gesamte byBias-Icon-Toolkit in einer einzigen
-GTK3-App. Das Hauptfenster ist ein Dashboard: Jede Aktion ist eine sichtbare
+**byBias-Icons-Packet** vereint das gesamte byBias-Icon-Toolkit in einer einzigen GTK3-App. Das Hauptfenster ist ein Dashboard: Jede Aktion ist eine sichtbare
 Kachel; ein Klick öffnet das zugehörige Panel im selben Fenster.
 
 **Aktionen**
@@ -139,9 +126,7 @@ python3 icons-packet
 
 ## Español
 
-Icons-Packet reúne todo el conjunto de herramientas de iconos byBias en una
-sola aplicación GTK3. La ventana principal es un panel: cada acción es una
-tarjeta visible y, al pulsarla, se abre su panel en la misma ventana.
+Icons-Packet reúne todo el conjunto de herramientas de iconos byBias en una sola aplicación GTK3. La ventana principal es un panel: cada acción es una tarjeta visible y, al pulsarla, se abre su panel en la misma ventana.
 
 **Acciones**
 - **Extraer iconos** — extrae iconos de archivos `.ico`, `.exe`, `.dll`, `.icl` (incluso renombrados), reconstruyendo PNG con transparencia.
@@ -165,9 +150,7 @@ python3 icons-packet
 
 ## Français
 
-Icons-Packet réunit toute la boîte à outils d'icônes byBias dans une seule
-application GTK3. La fenêtre principale est un tableau de bord : chaque action
-est une carte visible, et un clic ouvre son panneau dans la même fenêtre.
+**byBias-Icons-Packet** réunit toute la boîte à outils d'icônes byBias dans une seule application GTK3. La fenêtre principale est un tableau de bord : chaque action est une carte visible, et un clic ouvre son panneau dans la même fenêtre.
 
 **Actions**
 - **Extraire les icônes** — extrait les icônes des fichiers `.ico`, `.exe`, `.dll`, `.icl` (même renommés), en reconstruisant des PNG avec transparence.
@@ -181,19 +164,15 @@ est une carte visible, et un clic ouvre son panneau dans la même fenêtre.
 ```bash
 sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
 ```
-
 **Lancer**
 ```bash
 python3 icons-packet
 ```
-
 ---
 
 ## Nederlands
 
-Icons-Packet bundelt de volledige byBias-iconenset in één GTK3-app. Het
-hoofdvenster is een dashboard: elke actie is een zichtbare kaart, en een klik
-opent het bijbehorende paneel in hetzelfde venster.
+**byBias-Icons-Packet** bundelt de volledige byBias-iconenset in één GTK3-app. Het hoofdvenster is een dashboard: elke actie is een zichtbare kaart, en een klik opent het bijbehorende paneel in hetzelfde venster.
 
 **Acties**
 - **Iconen extraheren** — haal iconen uit `.ico`-, `.exe`-, `.dll`-, `.icl`-bestanden (ook hernoemd), als PNG met transparantie.
@@ -207,19 +186,15 @@ opent het bijbehorende paneel in hetzelfde venster.
 ```bash
 sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
 ```
-
 **Uitvoeren**
 ```bash
 python3 icons-packet
 ```
-
 ---
 
 ## Русский
 
-Icons-Packet объединяет весь набор инструментов byBias для значков в одном
-приложении GTK3. Главное окно — это панель: каждое действие представлено
-видимой карточкой, и по нажатию открывается его панель в том же окне.
+**byBias-Icons-Packet** объединяет весь набор инструментов byBias для значков в одном приложении GTK3. Главное окно — это панель: каждое действие представлено видимой карточкой, и по нажатию открывается его панель в том же окне.
 
 **Действия**
 - **Извлечь значки** — извлекает значки из файлов `.ico`, `.exe`, `.dll`, `.icl` (даже переименованных), восстанавливая PNG с прозрачностью.
@@ -243,9 +218,8 @@ python3 icons-packet
 
 ## العربية
 
-يجمع Icons-Packet مجموعة أدوات أيقونات byBias بالكامل في تطبيق GTK3 واحد.
-النافذة الرئيسية لوحة تحكم: كل إجراء بطاقة مرئية، والنقر عليها يفتح لوحته في
-النافذة نفسها.
+يجمع **byBias-Icons-Packet** مجموعة أدوات أيقونات byBias بالكامل في تطبيق GTK3 واحد.
+النافذة الرئيسية لوحة تحكم: كل إجراء بطاقة مرئية، والنقر عليها يفتح لوحته في النافذة نفسها.
 
 **الإجراءات**
 - **استخراج الأيقونات** — استخراج الأيقونات من ملفات `.ico` و`.exe` و`.dll` و`.icl` (حتى المعاد تسميتها)، وإعادة بناء صور PNG بالشفافية.
@@ -259,18 +233,15 @@ python3 icons-packet
 ```bash
 sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
 ```
-
 **التشغيل**
 ```bash
 python3 icons-packet
 ```
-
 ---
 
 ## 中文
 
-Icons-Packet 将整套 byBias 图标工具集整合到一个 GTK3 应用中。主窗口是一个仪表盘：
-每个操作都是一张可见的卡片，点击后会在同一窗口中打开其面板。
+**byBias-Icons-Packet** 将整套 byBias 图标工具集整合到一个 GTK3 应用中。主窗口是一个仪表盘：每个操作都是一张可见的卡片，点击后会在同一窗口中打开其面板。
 
 **功能**
 - **提取图标** — 从 `.ico`、`.exe`、`.dll`、`.icl` 文件（即使已重命名）中提取图标，重建带透明度的 PNG。
@@ -284,19 +255,15 @@ Icons-Packet 将整套 byBias 图标工具集整合到一个 GTK3 应用中。�
 ```bash
 sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
 ```
-
 **运行**
 ```bash
 python3 icons-packet
 ```
-
 ---
 
 ## 日本語
 
-Icons-Packet は byBias のアイコンツール一式を単一の GTK3 アプリにまとめたものです。
-メインウィンドウはダッシュボードで、各アクションが見えるカードになっており、
-クリックすると同じウィンドウ内にそのパネルが開きます。
+**byBias-Icons-Packet** は byBias のアイコンツール一式を単一の GTK3 アプリにまとめたものです。 メインウィンドウはダッシュボードで、各アクションが見えるカードになっており、 クリックすると同じウィンドウ内にそのパネルが開きます。
 
 **機能**
 - **アイコン抽出** — `.ico`・`.exe`・`.dll`・`.icl` ファイル（名前変更済みでも）からアイコンを抽出し、透過付き PNG を再構築します。
@@ -310,12 +277,8 @@ Icons-Packet は byBias のアイコンツール一式を単一の GTK3 アプ�
 ```bash
 sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
 ```
-
 **実行**
 ```bash
 python3 icons-packet
 ```
-
 ---
-
-*Made at the owl's hour. 🦉*

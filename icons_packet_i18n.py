@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+##########################################################
+##                 byBias Icons Packet                  ##
+##          Translation catalog, 10 languages           ##
+##                 written in Python 3                  ##
+##                          🌞                          ##
+##       by FranzBias 2026 · github.com/FranzBias       ##
+##            Licensed under the MIT License            ##
+##          See LICENSE file for full license.          ##
+##########################################################
+# SPDX-License-Identifier: MIT
 """
 icons_packet_i18n.py — translation catalog for Icons-Packet 📦🦉
 
@@ -164,6 +174,7 @@ CATALOG = {
         "Tint:": "Tinta:",
         "Tip: for the trash bin, install <b>both</b> slots ": "Suggerimento: per il cestino installa <b>entrambe</b> le caselle ",
         "(full and empty) for a consistent result.": "(pieno e vuoto) per un risultato coerente.",
+        "Made with ❤️ by FranzBias": "Fatto con ❤️ da FranzBias",
     },
     "de": {
         "Icon workshop for Cinnamon": "Icon-Werkstatt für Cinnamon",
@@ -275,6 +286,7 @@ CATALOG = {
         "Tint:": "Farbton:",
         "Tip: for the trash bin, install <b>both</b> slots ": "Tipp: Installiere für den Papierkorb <b>beide</b> Plätze ",
         "(full and empty) for a consistent result.": "(voll und leer) für ein einheitliches Ergebnis.",
+        "Made with ❤️ by FranzBias": "Mit ❤️ gemacht von FranzBias",
     },
     "es": {
         "Icon workshop for Cinnamon": "Taller de iconos para Cinnamon",
@@ -386,6 +398,7 @@ CATALOG = {
         "Tint:": "Tinte:",
         "Tip: for the trash bin, install <b>both</b> slots ": "Consejo: para la papelera, instala <b>ambas</b> casillas ",
         "(full and empty) for a consistent result.": "(llena y vacía) para un resultado coherente.",
+        "Made with ❤️ by FranzBias": "Hecho con ❤️ por FranzBias",
     },
     "fr": {
         "Icon workshop for Cinnamon": "Atelier d'icônes pour Cinnamon",
@@ -497,6 +510,7 @@ CATALOG = {
         "Tint:": "Teinte :",
         "Tip: for the trash bin, install <b>both</b> slots ": "Astuce : pour la corbeille, installe <b>les deux</b> emplacements ",
         "(full and empty) for a consistent result.": "(pleine et vide) pour un résultat cohérent.",
+        "Made with ❤️ by FranzBias": "Fait avec ❤️ par FranzBias",
     },
     "nl": {
         "Icon workshop for Cinnamon": "Icoonwerkplaats voor Cinnamon",
@@ -608,6 +622,7 @@ CATALOG = {
         "Tint:": "Tint:",
         "Tip: for the trash bin, install <b>both</b> slots ": "Tip: installeer voor de prullenbak <b>beide</b> slots ",
         "(full and empty) for a consistent result.": "(vol en leeg) voor een consistent resultaat.",
+        "Made with ❤️ by FranzBias": "Gemaakt met ❤️ door FranzBias",
     },
     "ru": {
         "Icon workshop for Cinnamon": "Мастерская значков для Cinnamon",
@@ -719,6 +734,7 @@ CATALOG = {
         "Tint:": "Оттенок:",
         "Tip: for the trash bin, install <b>both</b> slots ": "Совет: для корзины установите <b>оба</b> слота ",
         "(full and empty) for a consistent result.": "(полную и пустую) для согласованного результата.",
+        "Made with ❤️ by FranzBias": "Сделано с ❤️ FranzBias",
     },
     "ar": {
         "Icon workshop for Cinnamon": "ورشة الأيقونات لـ Cinnamon",
@@ -830,6 +846,7 @@ CATALOG = {
         "Tint:": "الدرجة:",
         "Tip: for the trash bin, install <b>both</b> slots ": "نصيحة: بالنسبة لسلة المهملات، ثبّت <b>كلتا</b> الخانتين ",
         "(full and empty) for a consistent result.": "(الممتلئة والفارغة) للحصول على نتيجة متسقة.",
+        "Made with ❤️ by FranzBias": "صُنع بـ ❤️ بواسطة FranzBias",
     },
     "zh": {
         "Icon workshop for Cinnamon": "Cinnamon 图标工坊",
@@ -941,6 +958,7 @@ CATALOG = {
         "Tint:": "色调：",
         "Tip: for the trash bin, install <b>both</b> slots ": "提示：对于回收站，请安装<b>两个</b>槽位",
         "(full and empty) for a consistent result.": "（满和空）以获得一致的效果。",
+        "Made with ❤️ by FranzBias": "由 FranzBias 用 ❤️ 制作",
     },
     "ja": {
         "Icon workshop for Cinnamon": "Cinnamon 用アイコン工房",
@@ -1052,5 +1070,6 @@ CATALOG = {
         "Tint:": "色合い:",
         "Tip: for the trash bin, install <b>both</b> slots ": "ヒント：ゴミ箱には<b>両方</b>のスロットを ",
         "(full and empty) for a consistent result.": "（満杯と空）インストールして一貫した結果に。",
+        "Made with ❤️ by FranzBias": "FranzBias が ❤️ を込めて制作",
     },
 }

@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+##########################################################
+##                 byBias Icons Packet                  ##
+##            Installer for the current user            ##
+##                   written in Bash                    ##
+##                          🌞                          ##
+##       by FranzBias 2026 · github.com/FranzBias       ##
+##            Licensed under the MIT License            ##
+##          See LICENSE file for full license.          ##
+##########################################################
+# SPDX-License-Identifier: MIT
 #############################################################
 #  install.sh — installa Icons-Packet 📦🦉
 #
@@ -47,7 +57,7 @@ for size in 16 24 32 48 64 128 256; do
     cp "$SRC/icon/icons-packet-${size}.png" "$dest/icons-packet.png"
 done
 mkdir -p "$ICON_HICOLOR/scalable/apps"
-cp "$SRC/icon/icons-packet.svg" "$ICON_HICOLOR/scalable/apps/icons-packet.svg"
+cp "$SRC/icons-packet.svg" "$ICON_HICOLOR/scalable/apps/icons-packet.svg"
 
 # 3. installa il .desktop, con i percorsi corretti per QUESTO utente
 cat > "$DESKTOP_DIR/icons-packet.desktop" <<EOF

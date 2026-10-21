@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+##########################################################
+##                 byBias Icons Packet                  ##
+##                    GTK3 dashboard                    ##
+##                 written in Python 3                  ##
+##                          🌞                          ##
+##       by FranzBias 2026 · github.com/FranzBias       ##
+##            Licensed under the MIT License            ##
+##          See LICENSE file for full license.          ##
+##########################################################
+# SPDX-License-Identifier: MIT
 """
 icons_packet_gui.py — interfaccia GTK3 di Icons-Packet 📦🦉
 
@@ -291,10 +301,12 @@ class IconsPacketWindow(Gtk.Window):
         dlg = Gtk.AboutDialog(transient_for=self)
         dlg.set_program_name(APP_NAME)
         dlg.set_version(APP_VERSION)
-        dlg.set_comments(tr("Icon workshop for Cinnamon."))
-        dlg.set_website(WEBSITE_URL)
-        dlg.set_website_label(tr("Website"))
-        dlg.set_authors(["Franz & Aldus 🦉"])
+        dlg.set_comments(
+            tr("Icon workshop for Cinnamon.") + "\n\n" +
+            tr("Made with ❤️ by FranzBias"))
+        dlg.set_website("https://github.com/FranzBias/byBias-Icons-Paket")
+        dlg.set_website_label("GitHub")
+        dlg.set_authors(["FranzBias"])
         dlg.set_license_type(Gtk.License.MIT_X11)
 
         here = Path(__file__).resolve().parent

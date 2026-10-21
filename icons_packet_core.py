@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+##########################################################
+##                 byBias Icons Packet                  ##
+##          Core logic, GTK-free and testable           ##
+##                 written in Python 3                  ##
+##                          🌞                          ##
+##       by FranzBias 2026 · github.com/FranzBias       ##
+##            Licensed under the MIT License            ##
+##          See LICENSE file for full license.          ##
+##########################################################
+# SPDX-License-Identifier: MIT
 """
 icons_packet_core.py — logica pura di Icons-Packet 📦🦉
 
