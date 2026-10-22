@@ -733,17 +733,46 @@ class IconsPacketWindow(Gtk.Window):
                 info(self, "Selettore non disponibile senza XApp.")
                 return
             theme = core.ICONS_DIR / "byBias-Icons"
-            dlg = XApp.IconChooserDialog()
-            dlg.set_property("allow-paths", True)
-            for folder in sorted(os.listdir(theme)) if theme.is_dir() else []:
-                p = theme / folder
-                if p.is_dir():
-                    icons = core.collect_icons(p)
-                    if icons:
-                        dlg.add_custom_category(core.category_label(folder), icons)
-            resp = dlg.run()
-            icon = dlg.get_icon_string() if resp == Gtk.ResponseType.OK else None
-            dlg.destroy()
+            if not theme.is_dir():
+                info(self, tr("The byBias-Icons theme was not found in "
+                              "~/.local/share/icons: build it first with "
+                              "\"Create / update theme\"."))
+                return
+            # XApp custom categories show icon NAMES from the current icon
+            # theme, not file paths (with paths they stay empty). So, only
+            # while the chooser is open, the app uses byBias-Icons as its icon
+            # theme; the chosen name is then mapped back to its file.
+            settings = Gtk.Settings.get_default()
+            old_theme = settings.get_property("gtk-icon-theme-name")
+            settings.set_property("gtk-icon-theme-name", theme.name)
+            paths = {}
+            icon = None
+            try:
+                dlg = XApp.IconChooserDialog()
+                dlg.set_property("allow-paths", True)
+                for folder in sorted(os.listdir(theme)):
+                    p = theme / folder
+                    if p.is_dir():
+                        names = []
+                        for f in core.collect_icons(p):
+                            stem = os.path.splitext(os.path.basename(f))[0]
+                            if stem not in paths:   # first file wins on duplicates
+                                paths[stem] = f
+                                names.append(stem)
+                        if names:
+                            dlg.add_custom_category(core.category_label(folder), names)
+                resp = dlg.run()
+                icon = dlg.get_icon_string() if resp == Gtk.ResponseType.OK else None
+                dlg.destroy()
+                if icon:
+                    icon = paths.get(icon, icon)
+                    if not icon.startswith(("/", "file://")):
+                        # a name from the standard categories: resolve to a file
+                        found = Gtk.IconTheme.get_default().lookup_icon(icon, 256, 0)
+                        if found and found.get_filename():
+                            icon = found.get_filename()
+            finally:
+                settings.set_property("gtk-icon-theme-name", old_theme)
             if icon and core.apply_icon_to(target, icon):
                 status.set_text(f"✔ Icona applicata a {target}")
             elif icon:
