@@ -336,7 +336,7 @@ class IconsPacketWindow(Gtk.Window):
         try:
             Gtk.show_uri_on_window(self, WEBSITE_URL, Gdk.CURRENT_TIME)
         except Exception:
-            info(self, f"Apri manualmente:\n{WEBSITE_URL}")
+            info(self, tr("Open it manually:\n{url}").format(url=WEBSITE_URL))
 
     def _on_toggle_dark_theme(self, item):
         """Cinnamon re-applies the theme from XSettings right after an app
@@ -589,10 +589,10 @@ class IconsPacketWindow(Gtk.Window):
             inner.pack_start(warn, False, False, 0)
 
         def on_click(_w):
-            files = pick_files(self, "Scegli file da cui estrarre")
+            files = pick_files(self, tr("Choose files to extract from"))
             if not files:
                 return
-            status.set_text("Estrazione in corso...")
+            status.set_text(tr("Extracting..."))
 
             def work():
                 res = [core.extract_from_file(f) for f in files]
@@ -602,16 +602,16 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
                 tot, res = val
                 via_ico = sum(1 for r in res if r.get("method") == "icoextract")
                 extra = (" " + tr("({count} via icoextract)").format(count=via_ico)
                          if via_ico else "")
                 status.set_text(
-                    f"✔ {tot} PNG estratti da {len(res)} file. "
-                    f"Cartella: ./extracted/" + extra)
+                    tr("✔ {png} PNGs extracted from {files} files. "
+                       "Folder: ./extracted/").format(png=tot, files=len(res)) + extra)
             run_in_thread(work, done)
 
         btn = Gtk.Button.new_with_label(tr("Choose files and extract..."))
@@ -631,10 +631,10 @@ class IconsPacketWindow(Gtk.Window):
         self._build_src = None
 
         def choose_src(_w):
-            p = pick_folder(self, "Cartella con le icone da aggiungere")
+            p = pick_folder(self, tr("Folder with the icons to add"))
             if p:
                 self._build_src = p
-                src_lbl.set_text(f"Sorgente: {p}")
+                src_lbl.set_text(tr("Source: {path}").format(path=p))
         src_btn = Gtk.Button.new_with_label(tr("Choose..."))
         src_btn.connect("clicked", choose_src)
         src_row.pack_start(src_lbl, True, True, 0)
@@ -659,18 +659,18 @@ class IconsPacketWindow(Gtk.Window):
         inh_row.pack_start(inh_combo, True, True, 0)
         inner.pack_start(inh_row, False, False, 0)
 
-        clean_chk = Gtk.CheckButton(label="Bonifica nomi (spazi/underscore→-, accenti)")
+        clean_chk = Gtk.CheckButton(label=tr("Clean up names (spaces/underscores → -, accents)"))
         clean_chk.set_active(True)
         inner.pack_start(clean_chk, False, False, 0)
 
         def on_build(_w):
             if not self._build_src:
-                info(self, "Scegli prima una cartella sorgente.")
+                info(self, tr("Choose a source folder first."))
                 return
             theme_name = core.clean_name(name_entry.get_text()) or "byBias-Icons"
             inherits = inh_combo.get_active_text() or "Mint-Y"
             dest = core.ICONS_DIR / theme_name
-            status.set_text("Costruzione tema in corso...")
+            status.set_text(tr("Building the theme..."))
 
             def work():
                 import shutil
@@ -688,12 +688,13 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
                 ndirs, ok, msg, tname = val
                 mark = "✔" if ok else "⚠"
-                status.set_text(f"{mark} Tema '{tname}': {ndirs} cartelle, cache: {msg}")
+                status.set_text(f"{mark} " + tr("Theme '{name}': {count} folders, cache: {cache}")
+                                .format(name=tname, count=ndirs, cache=msg))
             run_in_thread(work, done)
 
         build_btn = Gtk.Button.new_with_label(tr("Build theme"))
@@ -704,9 +705,10 @@ class IconsPacketWindow(Gtk.Window):
         def on_activate(_w):
             tname = core.clean_name(name_entry.get_text())
             if core.set_active_theme(tname):
-                status.set_text(f"✔ Tema '{tname}' attivato.")
+                status.set_text(tr("✔ Theme '{name}' activated.").format(name=tname))
             else:
-                status.set_markup("<span foreground='red'>Attivazione fallita.</span>")
+                status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                    tr("Activation failed.")) + "</span>")
         act_btn = Gtk.Button.new_with_label(tr("Activate this theme"))
         act_btn.connect("clicked", on_activate)
         inner.pack_start(act_btn, False, False, 0)
@@ -719,8 +721,9 @@ class IconsPacketWindow(Gtk.Window):
         status = self._status_label()
         if not HAVE_XAPP:
             warn = Gtk.Label()
-            warn.set_markup("<span foreground='red'>⚠ XApp non disponibile: "
-                            "il selettore con categorie richiede libxapp.</span>")
+            warn.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                tr("⚠ XApp is not available: the chooser with categories "
+                   "needs libxapp.")) + "</span>")
             inner.pack_start(warn, False, False, 0)
 
         desc = Gtk.Label(label=tr("Choose a destination folder, then an icon "
@@ -730,11 +733,11 @@ class IconsPacketWindow(Gtk.Window):
         inner.pack_start(desc, False, False, 0)
 
         def on_choose(_w):
-            target = pick_folder(self, "Cartella a cui applicare l'icona")
+            target = pick_folder(self, tr("Folder to apply the icon to"))
             if not target:
                 return
             if not HAVE_XAPP:
-                info(self, "Selettore non disponibile senza XApp.")
+                info(self, tr("The chooser is not available without XApp."))
                 return
             theme = core.ICONS_DIR / "byBias-Icons"
             if not theme.is_dir():
@@ -778,9 +781,10 @@ class IconsPacketWindow(Gtk.Window):
             finally:
                 settings.set_property("gtk-icon-theme-name", old_theme)
             if icon and core.apply_icon_to(target, icon):
-                status.set_text(f"✔ Icona applicata a {target}")
+                status.set_text(tr("✔ Icon applied to {path}").format(path=target))
             elif icon:
-                status.set_markup("<span foreground='red'>Applicazione fallita.</span>")
+                status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                    tr("Applying the icon failed.")) + "</span>")
 
         btn = Gtk.Button.new_with_label(tr("Choose folder and icon..."))
         btn.connect("clicked", on_choose)
@@ -806,11 +810,11 @@ class IconsPacketWindow(Gtk.Window):
         inner.pack_start(cov_row, False, False, 0)
 
         def on_click(_w):
-            files = pick_files(self, "Scegli PNG da convertire")
+            files = pick_files(self, tr("Choose PNGs to convert"))
             if not files:
                 return
             coverage = cov.get_value()
-            status.set_text("Generazione in corso...")
+            status.set_text(tr("Generating..."))
 
             def work():
                 done_n = 0
@@ -822,12 +826,12 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
                 n, tot = val
-                status.set_text(f"✔ {n}/{tot} icone simboliche generate "
-                                "(accanto ai PNG originali).")
+                status.set_text(tr("✔ {done}/{total} symbolic icons generated "
+                                   "(next to the original PNGs).").format(done=n, total=tot))
             run_in_thread(work, done)
 
         btn = Gtk.Button.new_with_label(tr("Choose PNGs and generate..."))
@@ -850,9 +854,9 @@ class IconsPacketWindow(Gtk.Window):
         def on_report(_w):
             theme = core.ICONS_DIR / "byBias-Icons"
             if not theme.is_dir():
-                info(self, "Tema byBias-Icons non trovato.")
+                info(self, tr("The byBias-Icons theme was not found."))
                 return
-            status.set_text("Analisi in corso...")
+            status.set_text(tr("Scanning..."))
 
             def work():
                 return core.find_collisions(str(theme))
@@ -860,27 +864,27 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
                 self._giants_found = val
                 if not val:
-                    status.set_text("✔ Nessuna collisione: niente giganti.")
+                    status.set_text(tr("✔ No collisions: no giants."))
                 else:
-                    status.set_text(f"⚠ {len(val)} file scippano nomi di sistema. "
-                                    "Premi 'Disinnesca' per prefissarli.")
+                    status.set_text(tr("⚠ {count} files hijack system names. Press "
+                                       "'Defuse the culprits' to prefix them.").format(count=len(val)))
             run_in_thread(work, done)
 
         def on_defuse(_w):
             if not self._giants_found:
-                info(self, "Esegui prima l'analisi.")
+                info(self, tr("Run the scan first."))
                 return
             n = core.defuse_collisions(self._giants_found)
             theme = core.ICONS_DIR / "byBias-Icons"
             core.build_index(theme)
             core.update_cache(theme)
             self._giants_found = []
-            status.set_text(f"✔ {n} file disinnescati, tema rigenerato.")
+            status.set_text(tr("✔ {count} files defused, theme rebuilt.").format(count=n))
 
         rep = Gtk.Button.new_with_label(tr("Scan (report)"))
         rep.connect("clicked", on_report)
@@ -904,9 +908,9 @@ class IconsPacketWindow(Gtk.Window):
         def on_prefix(_w):
             theme = core.ICONS_DIR / "byBias-Icons"
             if not theme.is_dir():
-                info(self, "Tema byBias-Icons non trovato.")
+                info(self, tr("The byBias-Icons theme was not found."))
                 return
-            status.set_text("Prefisso in corso...")
+            status.set_text(tr("Prefixing..."))
 
             def work():
                 n = core.prefix_all(str(theme))
@@ -917,11 +921,12 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
                 n, ok, msg = val
-                status.set_text(f"✔ {n} icone prefissate, tema rigenerato ({msg}).")
+                status.set_text(tr("✔ {count} icons prefixed, theme rebuilt ({cache}).")
+                                .format(count=n, cache=msg))
             run_in_thread(work, done)
 
         btn = Gtk.Button.new_with_label(tr("Prefix all icons"))
@@ -946,7 +951,7 @@ class IconsPacketWindow(Gtk.Window):
         slot_combo = Gtk.ComboBoxText()
         slots = core.system_slots()
         for name, label in slots:
-            slot_combo.append(name, f"{label}  ({name})")
+            slot_combo.append(name, f"{tr(label)}  ({name})")
         slot_combo.set_active(1)  # default: user-trash-full
         slot_row.pack_start(slot_combo, True, True, 0)
         inner.pack_start(slot_row, False, False, 0)
@@ -958,10 +963,10 @@ class IconsPacketWindow(Gtk.Window):
         img_lbl.set_halign(Gtk.Align.START)
 
         def choose_img(_w):
-            files = pick_files(self, "Scegli l'immagine (PNG o SVG)")
+            files = pick_files(self, tr("Choose the image (PNG or SVG)"))
             if files:
                 self._sys_image = files[0]
-                img_lbl.set_text(f"Immagine: {os.path.basename(files[0])}")
+                img_lbl.set_text(tr("Image: {name}").format(name=os.path.basename(files[0])))
         img_btn = Gtk.Button.new_with_label(tr("Choose..."))
         img_btn.connect("clicked", choose_img)
         img_row.pack_start(img_lbl, True, True, 0)
@@ -980,15 +985,15 @@ class IconsPacketWindow(Gtk.Window):
 
         def on_install(_w):
             if not self._sys_image:
-                info(self, "Scegli prima un'immagine.")
+                info(self, tr("Choose an image first."))
                 return
             slot = slot_combo.get_active_id()
             theme = core.ICONS_DIR / "byBias-Icons"
             if not theme.is_dir():
-                info(self, "Tema byBias-Icons non trovato. Crealo prima "
-                           "dalla sezione 'Crea / aggiorna tema'.")
+                info(self, tr("The byBias-Icons theme was not found. Create it first "
+                              "in the 'Create / update theme' section."))
                 return
-            status.set_text("Installazione in corso...")
+            status.set_text(tr("Installing..."))
 
             def work():
                 dest = core.install_system_icon(theme, slot, self._sys_image)
@@ -999,12 +1004,13 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
                 slot, dest, ok, msg = val
-                status.set_text(f"✔ '{slot}' installata. Tema rigenerato ({msg}).\n"
-                                "Riavvia Nemo (nemo -q) per vedere il cambiamento.")
+                status.set_text(tr("✔ '{slot}' installed. Theme rebuilt ({cache}).\n"
+                                   "Restart Nemo (nemo -q) to see the change.")
+                                .format(slot=slot, cache=msg))
             run_in_thread(work, done)
 
         install_btn = Gtk.Button.new_with_label(tr("Install as system icon"))
@@ -1017,8 +1023,8 @@ class IconsPacketWindow(Gtk.Window):
     def _theme_or_warn(self):
         theme = core.ICONS_DIR / "byBias-Icons"
         if not theme.is_dir():
-            info(self, "Tema byBias-Icons non trovato. Crealo prima dalla "
-                       "sezione 'Crea / aggiorna tema'.")
+            info(self, tr("The byBias-Icons theme was not found. Create it first "
+                          "in the 'Create / update theme' section."))
             return None
         return theme
 
@@ -1036,7 +1042,7 @@ class IconsPacketWindow(Gtk.Window):
             theme = self._theme_or_warn()
             if not theme:
                 return
-            status.set_text("Analisi in corso...")
+            status.set_text(tr("Scanning..."))
 
             def work():
                 return core.find_duplicates(theme)
@@ -1044,26 +1050,28 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
                 self._dup_groups = val
                 if not val:
-                    status.set_text("✔ Nessun duplicato trovato.")
+                    status.set_text(tr("✔ No duplicates found."))
                 else:
                     tot = sum(len(g) - 1 for g in val)
-                    status.set_text(f"⚠ {len(val)} gruppi di duplicati "
-                                    f"({tot} file ridondanti). "
-                                    "Premi 'Rimuovi' per tenerne uno per gruppo.")
+                    status.set_text(tr("⚠ {groups} groups of duplicates "
+                                       "({files} redundant files). Press 'Remove "
+                                       "redundant ones' to keep one per group.")
+                                    .format(groups=len(val), files=tot))
             run_in_thread(work, done)
 
         def on_remove(_w):
             if not self._dup_groups:
-                info(self, "Esegui prima l'analisi.")
+                info(self, tr("Run the scan first."))
                 return
             n = core.remove_duplicates(self._dup_groups)
             self._dup_groups = []
-            status.set_text(f"✔ {n} duplicati rimossi (un file conservato per gruppo).")
+            status.set_text(tr("✔ {count} duplicates removed (one file kept per group).")
+                            .format(count=n))
 
         b1 = Gtk.Button.new_with_label(tr("Scan"))
         b1.connect("clicked", on_scan)
@@ -1087,7 +1095,7 @@ class IconsPacketWindow(Gtk.Window):
             if not theme:
                 return
             out = Path.home() / "byBias-Icons-contact.png"
-            status.set_text("Generazione in corso...")
+            status.set_text(tr("Generating..."))
 
             def work():
                 return core.contact_sheet(theme, out)
@@ -1095,11 +1103,12 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
                 path, n = val
-                status.set_text(f"✔ Contact sheet con {n} icone salvato in:\n{path}")
+                status.set_text(tr("✔ Contact sheet with {count} icons saved to:\n{path}")
+                                .format(count=n, path=path))
             run_in_thread(work, done)
 
         b = Gtk.Button.new_with_label(tr("Generate contact sheet"))
@@ -1120,10 +1129,10 @@ class IconsPacketWindow(Gtk.Window):
             theme = self._theme_or_warn()
             if not theme:
                 return
-            files = pick_files(self, "Icona di riferimento")
+            files = pick_files(self, tr("Reference icon"))
             if not files:
                 return
-            status.set_text("Ricerca in corso...")
+            status.set_text(tr("Searching..."))
 
             def work():
                 return core.find_similar(files[0], theme, top=12)
@@ -1131,12 +1140,12 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
                 lines = "\n".join(f"  • {os.path.basename(p)}  (dist {d})"
                                   for p, d in val[:12])
-                status.set_text(f"Icone più simili:\n{lines}")
+                status.set_text(tr("Most similar icons:\n{list}").format(list=lines))
             run_in_thread(work, done)
 
         b = Gtk.Button.new_with_label(tr("Choose reference and search"))
@@ -1155,10 +1164,10 @@ class IconsPacketWindow(Gtk.Window):
         inner.pack_start(desc, False, False, 0)
 
         def on_go(_w):
-            files = pick_files(self, "Scegli PNG da normalizzare")
+            files = pick_files(self, tr("Choose PNGs to normalize"))
             if not files:
                 return
-            status.set_text("Generazione in corso...")
+            status.set_text(tr("Generating..."))
 
             def work():
                 tot = 0
@@ -1169,12 +1178,12 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
                 tot, nf = val
-                status.set_text(f"✔ {tot} file generati da {nf} icone "
-                                "(in cartelle '<nome>-sizes').")
+                status.set_text(tr("✔ {files} files generated from {icons} icons "
+                                   "(in '<name>-sizes' folders).").format(files=tot, icons=nf))
             run_in_thread(work, done)
 
         b = Gtk.Button.new_with_label(tr("Choose PNGs and normalize"))
@@ -1198,13 +1207,13 @@ class IconsPacketWindow(Gtk.Window):
         inner.pack_start(color_row, False, False, 0)
 
         def on_recolor(_w):
-            files = pick_files(self, "Scegli PNG da ricolorare")
+            files = pick_files(self, tr("Choose PNGs to recolor"))
             if not files:
                 return
             rgba = color_btn.get_rgba()
             hex_col = "#%02x%02x%02x" % (int(rgba.red*255),
                                          int(rgba.green*255), int(rgba.blue*255))
-            status.set_text("Ricolorazione in corso...")
+            status.set_text(tr("Recoloring..."))
 
             def work():
                 for f in files:
@@ -1214,15 +1223,16 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
                 n, hc = val
-                status.set_text(f"✔ {n} icone ricolorate in {hc}.")
+                status.set_text(tr("✔ {count} icons recolored to {color}.")
+                                .format(count=n, color=hc))
             run_in_thread(work, done)
 
         def on_invert(_w):
-            files = pick_files(self, "Scegli PNG da invertire")
+            files = pick_files(self, tr("Choose PNGs to invert"))
             if not files:
                 return
 
@@ -1234,10 +1244,10 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
-                status.set_text(f"✔ {val} icone invertite chiaro↔scuro.")
+                status.set_text(tr("✔ {count} icons inverted light↔dark.").format(count=val))
             run_in_thread(work, done)
 
         b1 = Gtk.Button.new_with_label(tr("Recolor with the chosen tint"))
@@ -1258,10 +1268,10 @@ class IconsPacketWindow(Gtk.Window):
         inner.pack_start(desc, False, False, 0)
 
         def on_go(_w):
-            files = pick_files(self, "Scegli PNG da rifilare")
+            files = pick_files(self, tr("Choose PNGs to trim"))
             if not files:
                 return
-            status.set_text("Elaborazione in corso...")
+            status.set_text(tr("Processing..."))
 
             def work():
                 for f in files:
@@ -1271,10 +1281,10 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
-                status.set_text(f"✔ {val} icone rifilate e ricentrate.")
+                status.set_text(tr("✔ {count} icons trimmed and recentered.").format(count=val))
             run_in_thread(work, done)
 
         b = Gtk.Button.new_with_label(tr("Choose PNGs and trim"))
@@ -1296,7 +1306,7 @@ class IconsPacketWindow(Gtk.Window):
             theme = self._theme_or_warn()
             if not theme:
                 return
-            status.set_text("Creazione pacchetto...")
+            status.set_text(tr("Creating the package..."))
 
             def work():
                 return core.export_theme_package(theme)
@@ -1304,10 +1314,10 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
-                status.set_text(f"✔ Pacchetto creato:\n{val}")
+                status.set_text(tr("✔ Package created:\n{path}").format(path=val))
             run_in_thread(work, done)
 
         b = Gtk.Button.new_with_label(tr("Export zip"))
@@ -1329,7 +1339,7 @@ class IconsPacketWindow(Gtk.Window):
             if not theme:
                 return
             out = Path.home() / "byBias-Icons-showcase.png"
-            status.set_text("Generazione in corso...")
+            status.set_text(tr("Generating..."))
 
             def work():
                 return core.make_showcase(theme, out)
@@ -1337,11 +1347,12 @@ class IconsPacketWindow(Gtk.Window):
             def done(result):
                 kind, val = result
                 if kind == "err":
-                    status.set_markup(f"<span foreground='red'>Errore: "
-                                f"{GLib.markup_escape_text(str(val))}</span>")
+                    status.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                        tr("Error: {error}").format(error=val)) + "</span>")
                     return
                 path, n = val
-                status.set_text(f"✔ Showcase con {n} icone salvato in:\n{path}")
+                status.set_text(tr("✔ Showcase with {count} icons saved to:\n{path}")
+                                .format(count=n, path=path))
             run_in_thread(work, done)
 
         b = Gtk.Button.new_with_label(tr("Generate showcase"))
@@ -1374,17 +1385,17 @@ class IconsPacketWindow(Gtk.Window):
                 return
             dest = core.backup_theme(theme)
             refresh_list()
-            status.set_text(f"✔ Backup creato:\n{dest}")
+            status.set_text(tr("✔ Backup created:\n{path}").format(path=dest))
 
         def on_restore(_w):
             zip_path = combo.get_active_id()
             if not zip_path:
-                info(self, "Nessun backup selezionato.")
+                info(self, tr("No backup selected."))
                 return
             theme = core.ICONS_DIR / "byBias-Icons"
             core.restore_backup(zip_path, theme)
             core.update_cache(theme)
-            status.set_text("✔ Tema ripristinato dal backup. Riavvia Nemo (nemo -q).")
+            status.set_text(tr("✔ Theme restored from the backup. Restart Nemo (nemo -q)."))
 
         b1 = Gtk.Button.new_with_label(tr("Create backup now"))
         b1.connect("clicked", on_backup)

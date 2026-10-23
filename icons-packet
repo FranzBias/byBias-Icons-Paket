@@ -24,6 +24,8 @@ import shutil
 import subprocess
 import sys
 
+from icons_packet_i18n import tr, set_language_from_locale  # no GTK needed
+
 # Dependencies: (readable name, apt package, test)
 #   test "py:MOD"      -> importable Python module
 #   test "gi:NS:VER"   -> namespace GObject-Introspection
@@ -68,16 +70,17 @@ def missing_packages():
 
 def ask_console(pkgs):
     """Ask for confirmation in the terminal. True if the user agrees."""
-    print("\nIcons-Packet ha bisogno di alcuni pacchetti di sistema:")
+    print("\n" + tr("Icons-Packet needs some system packages:"))
     for p in pkgs:
         print(f"  \u2022 {p}")
-    print("\nVerranno installati con:")
+    print("\n" + tr("They will be installed with:"))
     print(f"  sudo apt install {' '.join(pkgs)}\n")
     try:
-        ans = input("Procedo con l'installazione? [s/N] ").strip().lower()
+        ans = input(tr("Proceed with the installation? [y/N] ")).strip().lower()
     except EOFError:
         return False
-    return ans in ("s", "y")
+    # the "yes" letter of the current language, and always "y"
+    return ans in (tr("y"), "y")
 
 
 def ask_graphical(pkgs):
@@ -85,11 +88,11 @@ def ask_graphical(pkgs):
     True (go ahead) / False (refused) / None (no Zenity)."""
     if not shutil.which("zenity"):
         return None
-    text = ("Icons-Packet ha bisogno di alcuni pacchetti di sistema:\n\n"
+    text = (tr("Icons-Packet needs some system packages:") + "\n\n"
             + "\n".join(f"\u2022 {p}" for p in pkgs)
-            + "\n\nVuoi installarli ora?")
+            + "\n\n" + tr("Do you want to install them now?"))
     r = subprocess.run(["zenity", "--question", "--width=380",
-                        "--title=Icons-Packet \u2014 dipendenze",
+                        "--title=" + tr("Icons-Packet \u2014 dependencies"),
                         f"--text={text}"])
     return r.returncode == 0
 
@@ -100,18 +103,18 @@ def install(pkgs):
     apt_install = ["apt-get", "install", "-y", *pkgs]
 
     if shutil.which("pkexec"):
-        print("Autenticazione richiesta (finestra di sistema)...")
+        print(tr("Authentication required (system window)..."))
         subprocess.run(["pkexec", "apt-get", "update"])
         r = subprocess.run(["pkexec", *apt_install])
         return r.returncode == 0
 
     if shutil.which("sudo"):
-        print("Autenticazione richiesta (sudo)...")
+        print(tr("Authentication required (sudo)..."))
         subprocess.run(["sudo", "apt-get", "update"])
         r = subprocess.run(["sudo", *apt_install])
         return r.returncode == 0
 
-    print("N\u00e9 pkexec n\u00e9 sudo disponibili: installa manualmente con:")
+    print(tr("Neither pkexec nor sudo is available: install manually with:"))
     print(f"  sudo apt install {' '.join(pkgs)}")
     return False
 
@@ -127,7 +130,7 @@ def ensure_dependencies():
     if consent is None:
         consent = ask_console(pkgs)
     if not consent:
-        print("\nInstallazione annullata. Puoi installare a mano con:")
+        print("\n" + tr("Installation cancelled. You can install by hand with:"))
         print(f"  sudo apt install {' '.join(pkgs)}")
         return False
 
@@ -136,14 +139,15 @@ def ensure_dependencies():
 
     still = missing_packages()
     if still:
-        print("\nAlcuni pacchetti risultano ancora mancanti:")
+        print("\n" + tr("Some packages are still missing:"))
         print(f"  {' '.join(still)}")
-        print("Prova a installarli a mano e riavvia Icons-Packet.")
+        print(tr("Try installing them by hand, then restart Icons-Packet."))
         return False
     return True
 
 
 def main():
+    set_language_from_locale()
     if not ensure_dependencies():
         sys.exit(1)
     # at this point the graphical dependencies are surely there

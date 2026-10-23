@@ -28,6 +28,8 @@ import subprocess
 import unicodedata
 from pathlib import Path
 
+from icons_packet_i18n import tr  # no GTK: core stays usable without a display
+
 # --------------------------------------------------------------------------
 #  Shared constants
 # --------------------------------------------------------------------------
@@ -253,7 +255,7 @@ def extract_from_file(src_file, out_root="extracted", progress=None):
     pngdir.mkdir(parents=True, exist_ok=True)
 
     if progress:
-        progress(f"Estraggo risorse da {src_file.name}...")
+        progress(tr("Extracting resources from {name}...").format(name=src_file.name))
 
     if wrestool_available():
         subprocess.run(["wrestool", "--raw", "-x", "-t", "3",
@@ -464,7 +466,7 @@ def update_cache(theme_dir):
     r = subprocess.run(["gtk-update-icon-cache", "-f", str(theme_dir)],
                        capture_output=True, text=True)
     ok = (r.returncode == 0)
-    msg = (r.stderr or r.stdout).strip() or ("OK" if ok else "errore")
+    msg = (r.stderr or r.stdout).strip() or ("OK" if ok else tr("error"))
     return ok, msg
 
 
@@ -578,24 +580,25 @@ def apply_icon_to(target, icon_path):
 # Catalog of the most useful system "slots": (standard_name, label).
 # Installing your own PNG/SVG under that name in the theme replaces the
 # system icon everywhere it appears (panel, Nemo, menu...).
+# Labels are English sources: the GUI translates them with tr() when shown.
 SYSTEM_SLOTS = [
-    ("user-trash",          "Cestino vuoto"),
-    ("user-trash-full",     "Cestino pieno"),
-    ("folder",              "Cartella generica"),
-    ("user-home",           "Cartella Home"),
-    ("folder-download",     "Scaricati"),
-    ("folder-documents",    "Documenti"),
-    ("folder-pictures",     "Immagini"),
-    ("folder-music",        "Musica"),
-    ("folder-videos",       "Video"),
-    ("folder-desktop",      "Scrivania"),
+    ("user-trash",          "Empty trash"),
+    ("user-trash-full",     "Full trash"),
+    ("folder",              "Generic folder"),
+    ("user-home",           "Home folder"),
+    ("folder-download",     "Downloads"),
+    ("folder-documents",    "Documents"),
+    ("folder-pictures",     "Pictures"),
+    ("folder-music",        "Music"),
+    ("folder-videos",       "Videos"),
+    ("folder-desktop",      "Desktop"),
     ("computer",            "Computer"),
-    ("drive-harddisk",      "Disco fisso"),
-    ("drive-removable-media", "Chiavetta USB"),
-    ("network-workgroup",   "Rete"),
-    ("text-x-generic",      "File di testo"),
-    ("image-x-generic",     "Immagine generica"),
-    ("application-x-executable", "Eseguibile"),
+    ("drive-harddisk",      "Hard disk"),
+    ("drive-removable-media", "USB stick"),
+    ("network-workgroup",   "Network"),
+    ("text-x-generic",      "Text file"),
+    ("image-x-generic",     "Generic image"),
+    ("application-x-executable", "Executable"),
 ]
 
 
@@ -638,7 +641,7 @@ def find_duplicates(theme_dir, progress=None):
              if p.is_file() and p.suffix.lower() in EXTENSIONS]
     for i, p in enumerate(files):
         if progress and i % 50 == 0:
-            progress(f"Analizzo {i}/{len(files)}...")
+            progress(tr("Scanning {done}/{total}...").format(done=i, total=len(files)))
         h = hashlib.sha256(p.read_bytes()).hexdigest()
         by_hash.setdefault(h, []).append(str(p))
     return [sorted(g) for g in by_hash.values() if len(g) > 1]
@@ -946,9 +949,9 @@ def health_check(theme_dir):
     # 1. does index.theme exist?
     idx = theme_dir / "index.theme"
     if not idx.is_file():
-        report.append(("err", "Manca index.theme: il tema è invisibile al sistema."))
+        report.append(("err", tr("index.theme is missing: the theme is invisible to the system.")))
         return report
-    report.append(("ok", "index.theme presente."))
+    report.append(("ok", tr("index.theme is present.")))
 
     text = idx.read_text(errors="ignore")
 
@@ -959,46 +962,49 @@ def health_check(theme_dir):
             inh = line.split("=", 1)[1].strip()
             break
     if not inh:
-        report.append(("warn", "Nessun Inherits: icone mancanti diventeranno triangoli."))
+        report.append(("warn", tr("No Inherits: missing icons will become triangles.")))
     elif inh in ("Mint-Y", "Mint-Y-Dark", "hicolor", "Adwaita",
                  "gnome", "breeze"):
-        report.append(("ok", f"Inherits da tema completo ({inh})."))
+        report.append(("ok", tr("Inherits from a complete theme ({theme}).").format(theme=inh)))
     else:
-        report.append(("warn", f"Inherits='{inh}': verifica che sia un tema COMPLETO "
-                               "(le varianti colorate come Mint-X-Red danno triangoli)."))
+        report.append(("warn", tr("Inherits='{theme}': check that it is a COMPLETE theme "
+                                  "(coloured variants like Mint-X-Red give triangles).")
+                       .format(theme=inh)))
 
     # 3. accents in the names?
     accented = [str(p.relative_to(theme_dir)) for p in theme_dir.rglob("*")
                 if any(ord(c) > 127 for c in p.name)]
     if accented:
-        report.append(("err", f"{len(accented)} file/cartelle con accenti: "
-                              "la cache sarà invalida. Bonifica i nomi."))
+        report.append(("err", tr("{count} files/folders with accents: "
+                                 "the cache will be invalid. Clean up the names.")
+                       .format(count=len(accented))))
     else:
-        report.append(("ok", "Nessun accento nei nomi."))
+        report.append(("ok", tr("No accents in the names.")))
 
     # 4. spaces/underscores?
     dirty = [p for p in theme_dir.rglob("*")
              if " " in p.name or "_" in p.name]
     if dirty:
-        report.append(("warn", f"{len(dirty)} nomi con spazi/underscore "
-                               "(convenzione: solo trattini)."))
+        report.append(("warn", tr("{count} names with spaces/underscores "
+                                  "(convention: hyphens only).").format(count=len(dirty))))
     else:
-        report.append(("ok", "Nomi conformi (solo trattini)."))
+        report.append(("ok", tr("Names are compliant (hyphens only).")))
 
     # 5. collisions with system icons?
     cols = find_collisions(str(theme_dir))
     if cols:
-        report.append(("warn", f"{len(cols)} collisioni di nome con icone di "
-                               "sistema (possibili giganti). Usa 'Caccia ai giganti'."))
+        report.append(("warn", tr("{count} name collisions with system icons "
+                                  "(possible giants). Use 'Hunt the giants'.")
+                       .format(count=len(cols))))
     else:
-        report.append(("ok", "Nessuna collisione con icone di sistema."))
+        report.append(("ok", tr("No collisions with system icons.")))
 
     # 6. cache present and valid?
     cache = theme_dir / "icon-theme.cache"
     if not cache.is_file():
-        report.append(("warn", "Cache assente (non grave: il tema funziona comunque)."))
+        report.append(("warn", tr("The cache is missing (not serious: the theme works anyway).")))
     else:
-        report.append(("ok", "Cache presente."))
+        report.append(("ok", tr("The cache is present.")))
 
     return report
 
