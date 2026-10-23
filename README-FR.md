@@ -156,6 +156,16 @@ n'utilisent que des tirets (`-`), jamais d'espaces ni d'underscores ;
 l'application convertit les deux automatiquement dès qu'elle touche un
 thème.
 
+## Crédits
+
+Icons-Packet se tient sur les épaules de ces projets libres — merci :
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — extraction de secours, y compris depuis les fichiers .mun de Windows 10+ (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — extraction des icônes depuis .exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — traitement des images (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — l'interface (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — le sélecteur d'icônes (LGPL-3.0)
+
 ## 🌱 L'erreur est humaine
 
 Ce projet a été construit rapidement, par une seule personne, sur son

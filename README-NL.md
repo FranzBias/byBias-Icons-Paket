@@ -151,6 +151,16 @@ afhankelijkheidscontrole afhandelt.
 koppeltekens (`-`), nooit spaties of underscores; de app zet beide
 automatisch om zodra ze een thema aanraakt.
 
+## Met dank aan
+
+Icons-Packet staat op de schouders van deze vrije projecten — bedankt:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — reserve-extractie, ook uit .mun-bestanden van Windows 10+ (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — iconen uit .exe/.dll halen (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — beeldbewerking (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — de interface (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — de pictogramkiezer (LGPL-3.0)
+
 ## 🌱 Fouten maken is menselijk
 
 Dit project is snel gebouwd, door één persoon, in de vrije tijd — het is

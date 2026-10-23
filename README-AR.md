@@ -135,6 +135,16 @@ python3 icons-packet
 (`-`)، ولا تستخدم أبدًا المسافات أو الشرطات السفلية؛ يحوّل التطبيق
 كليهما تلقائيًا في كل مرة يتعامل فيها مع سمة.
 
+## شكر وتقدير
+
+يقف Icons-Packet على أكتاف هذه المشاريع الحرة — شكرًا لها:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — استخراج احتياطي، حتى من ملفات ‎.mun في Windows 10 وما بعده (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — استخراج الأيقونات من ‎.exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — معالجة الصور (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — الواجهة (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — أداة اختيار الأيقونات (LGPL-3.0)
+
 ## 🌱 الخطأ إنساني
 
 بُني هذا المشروع بسرعة، من قبل شخص واحد، في وقت فراغه — لذا من المحتمل

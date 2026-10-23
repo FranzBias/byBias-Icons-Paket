@@ -148,6 +148,16 @@ de la comprobación de dependencias descrita arriba.
 únicamente guiones (`-`), nunca espacios ni guiones bajos; la aplicación
 convierte ambos automáticamente cada vez que toca un tema.
 
+## Créditos
+
+Icons-Packet se apoya en los hombros de estos proyectos libres — gracias:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — extracción de reserva, también de archivos .mun de Windows 10+ (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — extracción de iconos de .exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — procesamiento de imágenes (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — la interfaz (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — el selector de iconos (LGPL-3.0)
+
 ## 🌱 Errar es humano
 
 Este proyecto se construyó rápido, por una sola persona, en su tiempo

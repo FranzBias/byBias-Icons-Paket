@@ -137,6 +137,16 @@ check above.
 never spaces or underscores; the app converts both automatically whenever
 it touches a theme.
 
+## Credits
+
+Icons-Packet stands on the shoulders of these free projects — thank you:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — fallback icon extraction, also from Windows 10+ .mun files (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — icon extraction from .exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — image processing (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — the interface (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — the icon chooser (LGPL-3.0)
+
 ## 🌱 To err is human
 
 This project was built fast, by one person, in their spare time — so it's

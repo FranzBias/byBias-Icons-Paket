@@ -145,6 +145,16 @@ python3 icons-packet
 スペースやアンダースコアは使いません。アプリはテーマを扱うたびに両方
 を自動的に変換します。
 
+## クレジット
+
+Icons-Packet は次のフリーなプロジェクトの肩の上に立っています — ありがとう：
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — 予備の抽出（Windows 10 以降の .mun ファイルにも対応） (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — .exe/.dll からのアイコン抽出 (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — 画像処理 (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — インターフェース (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — アイコン選択ダイアログ (LGPL-3.0)
+
 ## 🌱 過ちは人の常
 
 このプロジェクトは、一人の人間が余暇の時間に急いで作り上げたものです

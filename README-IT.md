@@ -143,6 +143,16 @@ il controllo delle dipendenze descritto sopra.
 (`-`), mai spazi né underscore; l'app converte entrambi automaticamente
 ogni volta che tocca un tema.
 
+## Crediti
+
+Icons-Packet poggia sulle spalle di questi progetti liberi — grazie:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — estrazione di riserva, anche dai file .mun di Windows 10+ (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — estrazione delle icone da .exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — elaborazione delle immagini (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — l'interfaccia (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — il selettore di icone (LGPL-3.0)
+
 ## 🌱 Sbagliare è umano
 
 Questo progetto è stato costruito in fretta, da una sola persona, nel

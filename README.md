@@ -58,6 +58,16 @@ python3 icons-packet
 **Naming convention** — file and folder names use hyphens only (`-`), never
 spaces or underscores; the app converts both automatically.
 
+**Credits**
+
+Icons-Packet stands on the shoulders of these free projects — thank you:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — fallback icon extraction, also from Windows 10+ .mun files (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — icon extraction from .exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — image processing (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — the interface (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — the icon chooser (LGPL-3.0)
+
 ---
 
 ## Italiano
@@ -104,6 +114,16 @@ launcher.
 **Convenzione dei nomi** — i nomi di file e cartelle usano solo trattini
 (`-`), mai spazi né underscore; l'app converte entrambi automaticamente.
 
+**Crediti**
+
+Icons-Packet poggia sulle spalle di questi progetti liberi — grazie:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — estrazione di riserva, anche dai file .mun di Windows 10+ (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — estrazione delle icone da .exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — elaborazione delle immagini (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — l'interfaccia (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — il selettore di icone (LGPL-3.0)
+
 ---
 
 ## Deutsch
@@ -130,6 +150,16 @@ sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils 
 python3 icons-packet
 ```
 
+**Danksagung**
+
+Icons-Packet steht auf den Schultern dieser freien Projekte — danke:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — Ersatz-Extraktion, auch aus .mun-Dateien von Windows 10+ (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — Icon-Extraktion aus .exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — Bildverarbeitung (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — die Oberfläche (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — die Symbolauswahl (LGPL-3.0)
+
 ---
 
 ## Español
@@ -155,6 +185,16 @@ sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils 
 python3 icons-packet
 ```
 
+**Créditos**
+
+Icons-Packet se apoya en los hombros de estos proyectos libres — gracias:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — extracción de reserva, también de archivos .mun de Windows 10+ (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — extracción de iconos de .exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — procesamiento de imágenes (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — la interfaz (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — el selector de iconos (LGPL-3.0)
+
 ---
 
 ## Français
@@ -178,6 +218,16 @@ sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils 
 ```bash
 python3 icons-packet
 ```
+**Crédits**
+
+Icons-Packet se tient sur les épaules de ces projets libres — merci :
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — extraction de secours, y compris depuis les fichiers .mun de Windows 10+ (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — extraction des icônes depuis .exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — traitement des images (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — l'interface (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — le sélecteur d'icônes (LGPL-3.0)
+
 ---
 
 ## Nederlands
@@ -201,6 +251,16 @@ sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils 
 ```bash
 python3 icons-packet
 ```
+**Met dank aan**
+
+Icons-Packet staat op de schouders van deze vrije projecten — bedankt:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — reserve-extractie, ook uit .mun-bestanden van Windows 10+ (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — iconen uit .exe/.dll halen (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — beeldbewerking (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — de interface (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — de pictogramkiezer (LGPL-3.0)
+
 ---
 
 ## Русский
@@ -226,6 +286,16 @@ sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils 
 python3 icons-packet
 ```
 
+**Благодарности**
+
+Icons-Packet стоит на плечах этих свободных проектов — спасибо:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — резервное извлечение, в том числе из файлов .mun Windows 10+ (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — извлечение значков из .exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — обработка изображений (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — интерфейс (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — выбор значков (LGPL-3.0)
+
 ---
 
 ## العربية
@@ -250,6 +320,16 @@ sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils 
 ```bash
 python3 icons-packet
 ```
+**شكر وتقدير**
+
+يقف Icons-Packet على أكتاف هذه المشاريع الحرة — شكرًا لها:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — استخراج احتياطي، حتى من ملفات ‎.mun في Windows 10 وما بعده (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — استخراج الأيقونات من ‎.exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — معالجة الصور (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — الواجهة (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — أداة اختيار الأيقونات (LGPL-3.0)
+
 ---
 
 ## 中文
@@ -273,6 +353,16 @@ sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils 
 ```bash
 python3 icons-packet
 ```
+**致谢**
+
+Icons-Packet 站在这些自由项目的肩膀上——谢谢它们：
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — 备用提取，也支持 Windows 10+ 的 .mun 文件 (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — 从 .exe/.dll 中提取图标 (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — 图像处理 (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — 界面 (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — 图标选择器 (LGPL-3.0)
+
 ---
 
 ## 日本語
@@ -296,4 +386,14 @@ sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils 
 ```bash
 python3 icons-packet
 ```
+**クレジット**
+
+Icons-Packet は次のフリーなプロジェクトの肩の上に立っています — ありがとう：
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — 予備の抽出（Windows 10 以降の .mun ファイルにも対応） (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — .exe/.dll からのアイコン抽出 (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — 画像処理 (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — インターフェース (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — アイコン選択ダイアログ (LGPL-3.0)
+
 ---

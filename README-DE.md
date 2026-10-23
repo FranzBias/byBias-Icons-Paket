@@ -146,6 +146,16 @@ Abhängigkeitsprüfung übernimmt.
 Bindestriche (`-`), niemals Leerzeichen oder Unterstriche; die App
 wandelt beides automatisch um, sobald sie ein Thema bearbeitet.
 
+## Danksagung
+
+Icons-Packet steht auf den Schultern dieser freien Projekte — danke:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — Ersatz-Extraktion, auch aus .mun-Dateien von Windows 10+ (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — Icon-Extraktion aus .exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — Bildverarbeitung (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — die Oberfläche (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — die Symbolauswahl (LGPL-3.0)
+
 ## 🌱 Irren ist menschlich
 
 Dieses Projekt wurde schnell, von einer einzelnen Person, in der Freizeit

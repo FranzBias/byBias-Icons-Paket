@@ -153,6 +153,16 @@ python3 icons-packet
 дефисы (`-`), никогда пробелы или подчёркивания; приложение
 автоматически преобразует и то, и другое при каждом обращении к теме.
 
+## Благодарности
+
+Icons-Packet стоит на плечах этих свободных проектов — спасибо:
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — резервное извлечение, в том числе из файлов .mun Windows 10+ (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — извлечение значков из .exe/.dll (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — обработка изображений (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — интерфейс (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — выбор значков (LGPL-3.0)
+
 ## 🌱 Человеку свойственно ошибаться
 
 Этот проект был создан быстро, одним человеком, в свободное время —

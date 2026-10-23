@@ -117,6 +117,16 @@ python3 icons-packet
 **命名规范** — 文件和文件夹名称仅使用连字符（`-`），绝不使用空格或下划
 线；应用每次处理主题时都会自动转换这两者。
 
+## 致谢
+
+Icons-Packet 站在这些自由项目的肩膀上——谢谢它们：
+
+- [icoextract](https://github.com/jlu5/icoextract) — James Lu — 备用提取，也支持 Windows 10+ 的 .mun 文件 (MIT)
+- [icoutils](https://www.nongnu.org/icoutils/) (`wrestool`) — 从 .exe/.dll 中提取图标 (GPL-3.0+)
+- [Pillow](https://python-pillow.org/) — 图像处理 (MIT-CMU)
+- [PyGObject](https://pygobject.gnome.org/) + GTK 3 — 界面 (LGPL-2.1+)
+- [XApp](https://github.com/linuxmint/xapp) — Linux Mint — 图标选择器 (LGPL-3.0)
+
 ## 🌱 犯错乃人之常情
 
 这个项目是由一个人在业余时间快速搭建的——因此完全有可能仍存在一些不完
