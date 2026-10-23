@@ -76,6 +76,7 @@ d'entretien d'un thème d'icônes, du début à la fin :
   plus) et une de tes images : elle est installée sous le nom standard
   exact, et prend donc la place de cette icône partout où elle apparaît
   sur le bureau.
+- **Clic droit dans Nemo** — *Changer l'icône…* ouvre ta collection et applique l'icône au dossier ou au fichier sélectionné ; *Coller l'icône* utilise l'image du presse-papiers. Installées par `install.sh` (appuie sur F5 dans Nemo pour voir la nouvelle icône).
 
 Au-delà du flux principal, le tableau de bord regroupe des outils plus
 spécialisés en quatre sections, chacune pensée pour un type de casse-tête

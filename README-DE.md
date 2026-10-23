@@ -70,6 +70,7 @@ eines Icon-Themas ab, von Anfang bis Ende:
   leer, allgemeiner Ordner, Home-Ordner und mehr) und eines deiner
   eigenen Bilder: Es wird unter dem exakten Standardnamen installiert und
   übernimmt damit überall auf dem Desktop, wo dieses Icon erscheint.
+- **Rechtsklick in Nemo** — *Symbol ändern…* öffnet deine Sammlung und wendet das Symbol auf den gewählten Ordner oder die Datei an; *Symbol einfügen* nimmt das Bild aus der Zwischenablage. Wird von `install.sh` installiert (drücke F5 in Nemo, um das neue Symbol zu sehen).
 
 Über den Hauptablauf hinaus bündelt das Dashboard spezialisiertere
 Werkzeuge in vier Bereichen, jeder für eine bestimmte Art von Kopfzerbrechen:

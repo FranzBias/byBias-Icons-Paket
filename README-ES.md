@@ -71,6 +71,7 @@ tema de iconos, de principio a fin:
   (papelera llena/vacía, carpeta genérica, carpeta de inicio, y más) y
   una imagen tuya: se instala con el nombre estándar exacto, así que
   ocupa el lugar de ese icono en todo el escritorio.
+- **Clic derecho en Nemo** — *Cambiar icono…* abre tu colección y aplica el icono a la carpeta o al archivo seleccionado; *Pegar icono* usa la imagen del portapapeles. Las instala `install.sh` (pulsa F5 en Nemo para ver el icono nuevo).
 
 Más allá del flujo principal, el panel agrupa herramientas más
 especializadas en cuatro secciones, cada una pensada para un tipo

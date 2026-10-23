@@ -72,6 +72,7 @@ onderhouden van een icoonthema, van begin tot eind:
   afbeeldingen: deze wordt geïnstalleerd onder de exacte
   standaardnaam, en neemt zo overal op het bureaublad de plek van dat
   icoon over.
+- **Rechtsklik in Nemo** — *Pictogram wijzigen…* opent je collectie en past het pictogram toe op de gekozen map of het gekozen bestand; *Pictogram plakken* gebruikt de afbeelding op het klembord. Geïnstalleerd door `install.sh` (druk op F5 in Nemo om het nieuwe pictogram te zien).
 
 Naast de hoofdstroom bundelt het dashboard meer gespecialiseerde
 hulpmiddelen in vier secties, elk gericht op een specifiek soort

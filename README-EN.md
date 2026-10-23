@@ -66,6 +66,7 @@ icon theme, start to finish:
   folder, home folder, and more) and one of your own images: it's
   installed under the exact standard name, so it takes over everywhere
   that icon appears across the desktop.
+- **Right-click in Nemo** — *Change icon…* opens your collection and applies the icon to the selected folder or file; *Paste icon* uses the image in the clipboard. Installed by `install.sh` (press F5 in Nemo to see the new icon).
 
 Beyond the main flow, the dashboard groups more specialised tools into four
 sections, each one solving a specific kind of headache:

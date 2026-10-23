@@ -68,6 +68,7 @@ manutenzione di un tema di icone, dall'inizio alla fine:
   (cestino pieno/vuoto, cartella generica, cartella home, e altre) e una
   tua immagine: viene installata col nome standard esatto, così prende
   il posto di quell'icona ovunque compaia sul desktop.
+- **Tasto destro in Nemo** — *Cambia icona…* apre la tua collezione e applica l'icona alla cartella o al file selezionato; *Incolla icona* usa l'immagine negli appunti. Le installa `install.sh` (premi F5 in Nemo per vedere l'icona nuova).
 
 Oltre al flusso principale, la dashboard raggruppa strumenti più
 specializzati in quattro sezioni, ognuna pensata per un tipo specifico di

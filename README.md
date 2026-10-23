@@ -28,6 +28,7 @@ opens its panel in the same window.
 - **Hunt the giants** — find and defuse name collisions with system icons (the cause of giant / missing-icon triangles).
 - **Prefix everything** — add the `bybias-` prefix to all icons: zero automatic substitutions.
 - **Replace system icons** — pick a system slot (full/empty trash, folders, home, etc.) and one of your images: it's installed under the standard name, so it replaces the system icon everywhere it appears.
+- **Right-click in Nemo** — *Change icon…* opens your collection and applies the icon to the selected folder or file; *Paste icon* uses the image in the clipboard. Installed by `install.sh` (press F5 in Nemo to see the new icon).
 
 The dashboard also groups extra tools into four selectable sections:
 
@@ -71,6 +72,7 @@ spaces or underscores; the app converts both automatically.
 - **Caccia ai giganti** — trova e disinnesca le collisioni di nome con le icone di sistema (causa di icone giganti / triangoli).
 - **Prefissa tutto** — aggiunge il prefisso `bybias-` a tutte le icone: zero sostituzioni automatiche.
 - **Sostituisci icone di sistema** — scegli una casella di sistema (cestino pieno/vuoto, cartelle, home, ecc.) e una tua immagine: viene installata col nome standard, così sostituisce l'icona di sistema ovunque compaia.
+- **Tasto destro in Nemo** — *Cambia icona…* apre la tua collezione e applica l'icona alla cartella o al file selezionato; *Incolla icona* usa l'immagine negli appunti. Le installa `install.sh` (premi F5 in Nemo per vedere l'icona nuova).
 
 La dashboard raggruppa inoltre strumenti extra in quattro sezioni selezionabili:
 
@@ -116,6 +118,7 @@ Kachel; ein Klick öffnet das zugehörige Panel im selben Fenster.
 - **Symbolische Icons** — monochrome 16×16-SVG-Icons aus PNGs erzeugen.
 - **Jagd auf die Riesen** — Namenskollisionen mit System-Icons finden und entschärfen (Ursache riesiger / fehlender Icons).
 - **Alles mit Präfix** — allen Icons das Präfix `bybias-` geben: keine automatischen Ersetzungen.
+- **Rechtsklick in Nemo** — *Symbol ändern…* öffnet deine Sammlung und wendet das Symbol auf den gewählten Ordner oder die Datei an; *Symbol einfügen* nimmt das Bild aus der Zwischenablage. Wird von `install.sh` installiert (drücke F5 in Nemo, um das neue Symbol zu sehen).
 
 **Voraussetzungen**
 ```bash
@@ -140,6 +143,7 @@ Icons-Packet reúne todo el conjunto de herramientas de iconos byBias en una sol
 - **Iconos simbólicos** — genera iconos simbólicos SVG 16×16 monocromos a partir de PNG.
 - **Caza de gigantes** — encuentra y desactiva las colisiones de nombres con iconos del sistema.
 - **Prefijar todo** — añade el prefijo `bybias-` a todos los iconos: cero sustituciones automáticas.
+- **Clic derecho en Nemo** — *Cambiar icono…* abre tu colección y aplica el icono a la carpeta o al archivo seleccionado; *Pegar icono* usa la imagen del portapapeles. Las instala `install.sh` (pulsa F5 en Nemo para ver el icono nuevo).
 
 **Requisitos**
 ```bash
@@ -164,6 +168,7 @@ python3 icons-packet
 - **Icônes symboliques** — génère des icônes symboliques SVG 16×16 monochromes à partir de PNG.
 - **Chasse aux géants** — trouve et neutralise les collisions de noms avec les icônes système.
 - **Tout préfixer** — ajoute le préfixe `bybias-` à toutes les icônes : zéro substitution automatique.
+- **Clic droit dans Nemo** — *Changer l'icône…* ouvre ta collection et applique l'icône au dossier ou au fichier sélectionné ; *Coller l'icône* utilise l'image du presse-papiers. Installées par `install.sh` (appuie sur F5 dans Nemo pour voir la nouvelle icône).
 
 **Prérequis**
 ```bash
@@ -186,6 +191,7 @@ python3 icons-packet
 - **Symbolische iconen** — genereer monochrome 16×16 SVG-iconen uit PNG's.
 - **Jacht op de reuzen** — vind en ontmantel naamconflicten met systeemiconen.
 - **Alles voorvoegen** — geef alle iconen het voorvoegsel `bybias-`: geen automatische vervangingen.
+- **Rechtsklik in Nemo** — *Pictogram wijzigen…* opent je collectie en past het pictogram toe op de gekozen map of het gekozen bestand; *Pictogram plakken* gebruikt de afbeelding op het klembord. Geïnstalleerd door `install.sh` (druk op F5 in Nemo om het nieuwe pictogram te zien).
 
 **Vereisten**
 ```bash
@@ -208,6 +214,7 @@ python3 icons-packet
 - **Символические значки** — создаёт монохромные значки SVG 16×16 из PNG.
 - **Охота на гигантов** — находит и обезвреживает конфликты имён со системными значками.
 - **Префикс для всего** — добавляет префикс `bybias-` ко всем значкам: никаких автоматических замен.
+- **Правый клик в Nemo** — *Сменить значок…* открывает вашу коллекцию и применяет значок к выбранной папке или файлу; *Вставить значок* берёт изображение из буфера обмена. Устанавливаются через `install.sh` (нажмите F5 в Nemo, чтобы увидеть новый значок).
 
 **Требования**
 ```bash
@@ -233,6 +240,7 @@ python3 icons-packet
 - **أيقونات رمزية** — إنشاء أيقونات رمزية SVG أحادية اللون بحجم 16×16 من ملفات PNG.
 - **مطاردة العمالقة** — العثور على تعارضات الأسماء مع أيقونات النظام وإبطالها.
 - **بادئة للكل** — إضافة البادئة `bybias-` إلى كل الأيقونات: لا استبدالات تلقائية.
+- **النقر بزر الفأرة الأيمن في Nemo** — *تغيير الأيقونة…* يفتح مجموعتك ويطبّق الأيقونة على المجلد أو الملف المحدد؛ و*لصق أيقونة* يستخدم الصورة الموجودة في الحافظة. يثبّتهما `install.sh` (اضغط F5 في Nemo لرؤية الأيقونة الجديدة).
 
 **المتطلبات**
 ```bash
@@ -255,6 +263,7 @@ python3 icons-packet
 - **符号图标** — 从 PNG 生成单色 16×16 SVG 符号图标。
 - **猎巨人** — 查找并化解与系统图标的命名冲突。
 - **全部加前缀** — 为所有图标添加 `bybias-` 前缀：不做任何自动替换。
+- **在 Nemo 中右键** — *更改图标…* 打开你的收藏并将图标应用到所选文件夹或文件；*粘贴图标* 使用剪贴板中的图像。由 `install.sh` 安装（在 Nemo 中按 F5 即可看到新图标）。
 
 **依赖**
 ```bash
@@ -277,6 +286,7 @@ python3 icons-packet
 - **シンボリックアイコン** — PNG から単色 16×16 の SVG シンボリックアイコンを生成します。
 - **巨人狩り** — システムアイコンとの名前衝突を見つけて無効化します。
 - **すべてにプレフィックス** — すべてのアイコンに `bybias-` を付与：自動置換なし。
+- **Nemo で右クリック** — *アイコンを変更…* はコレクションを開き、選んだフォルダーやファイルにアイコンを適用します。*アイコンを貼り付け* はクリップボードの画像を使います。`install.sh` でインストールされます（新しいアイコンは Nemo で F5 を押すと表示されます）。
 
 **必要環境**
 ```bash
