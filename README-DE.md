@@ -121,7 +121,7 @@ selbst.
 ## Voraussetzungen
 
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 
 Fehlt beim ersten Start eine Abhängigkeit, erkennt byBias-Icons-Packet

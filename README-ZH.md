@@ -96,7 +96,7 @@ README 全部 10 种语言的**语言切换器**，以及应用自身的**浅色
 ## 依赖
 
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 
 首次运行时，如果缺少任何依赖，byBias-Icons-Packet 会检测到，准确列出所

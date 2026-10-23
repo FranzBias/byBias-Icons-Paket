@@ -123,7 +123,7 @@ idioma** que cubre los 10 idiomas de este README, y un interruptor de
 ## Requisitos
 
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 
 En el primer arranque, si falta alguna dependencia, byBias-Icons-Packet

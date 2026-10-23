@@ -22,6 +22,7 @@ by Franz & Aldus
 
 import os
 import re
+import shutil
 import struct
 import subprocess
 import unicodedata
@@ -238,8 +239,10 @@ def read_dib_to_img(data):
 def extract_from_file(src_file, out_root="extracted", progress=None):
     """Extract the icons from a .ico/.exe/.dll/.icl file.
 
-    Requires wrestool (icoutils package). Returns a dict with counts.
-    `progress` is optional: callback(str) for progress messages.
+    Uses wrestool (icoutils package) first. When wrestool is missing or finds
+    nothing, falls back to icoextract (optional Python package, MIT), which
+    also reads Windows 10+ .mun files. Returns a dict with counts and the
+    "method" that produced the PNGs. `progress` is optional: callback(str).
     """
     from PIL import Image
     src_file = Path(src_file)
@@ -252,9 +255,10 @@ def extract_from_file(src_file, out_root="extracted", progress=None):
     if progress:
         progress(f"Estraggo risorse da {src_file.name}...")
 
-    subprocess.run(["wrestool", "--raw", "-x", "-t", "3",
-                    "-o", str(rawdir), str(src_file)],
-                   capture_output=True)
+    if wrestool_available():
+        subprocess.run(["wrestool", "--raw", "-x", "-t", "3",
+                        "-o", str(rawdir), str(src_file)],
+                       capture_output=True)
 
     saved = skipped = 0
     raw_files = sorted(p for p in rawdir.glob("*") if p.is_file())
@@ -272,13 +276,51 @@ def extract_from_file(src_file, out_root="extracted", progress=None):
         img.save(out_png, "PNG")
         saved += 1
 
+    method = "wrestool" if saved else None
+    if not saved and icoextract_available():
+        groups, got = _extract_with_icoextract(src_file, pngdir)
+        if got:
+            saved, method = got, "icoextract"
+        skipped += groups - got
+
     return {"file": src_file.name, "raw": len(raw_files),
-            "png": saved, "skipped": skipped, "pngdir": str(pngdir)}
+            "png": saved, "skipped": skipped, "pngdir": str(pngdir),
+            "method": method}
+
+
+def _extract_with_icoextract(src_file, pngdir):
+    """Fallback: one PNG per icon group, at its largest size.
+    Returns (number_of_groups, number_of_PNGs_saved)."""
+    from PIL import Image
+    from icoextract import IconExtractor
+    try:
+        extractor = IconExtractor(str(src_file))
+        groups = extractor.list_group_icons()
+    except Exception:  # noqa: BLE001 — not a PE file, damaged, no resources
+        return 0, 0
+    saved = 0
+    for i in range(len(groups)):
+        try:
+            ico = Image.open(extractor.get_icon(num=i))
+            biggest = ico.ico.getimage(max(ico.ico.sizes()))
+            biggest.save(Path(pngdir) / f"icoextract-{i + 1}.png", "PNG")
+            saved += 1
+        except Exception:  # noqa: BLE001 — skip one unreadable group
+            continue
+    return len(groups), saved
 
 
 def wrestool_available():
-    return subprocess.run(["which", "wrestool"],
-                          capture_output=True).returncode == 0
+    return shutil.which("wrestool") is not None
+
+
+def icoextract_available():
+    """True when the optional icoextract package can be imported."""
+    try:
+        import icoextract  # noqa: F401
+    except ImportError:
+        return False
+    return True
 
 
 # --------------------------------------------------------------------------

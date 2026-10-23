@@ -44,7 +44,7 @@ A menu at the top-left of the window (☰) gives quick access to **About**, the 
 
 **Requirements**
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 On first run, if any dependency is missing, byBias-Icons-Packet detects it, lists what's needed, asks for your consent, and installs it via the system's graphical authentication (pkexec) or sudo — so you can also just launch it and let it set itself up. Your password is handled by the system, never by the app.
 
@@ -88,7 +88,7 @@ Un menu in alto a sinistra (☰) dà accesso rapido a **Informazioni**, al **lin
 
 **Requisiti**
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 Al primo avvio, se manca qualche dipendenza, byBias-Icons-Packet la rileva, elenca cosa serve, chiede il tuo consenso e la installa tramite l'autenticazione grafica di sistema (pkexec) o sudo — quindi puoi anche solo lanciarlo e
 lasciare che si configuri da solo. La password la gestisce il sistema, mai l'app.
@@ -122,7 +122,7 @@ Kachel; ein Klick öffnet das zugehörige Panel im selben Fenster.
 
 **Voraussetzungen**
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 
 **Starten**
@@ -147,7 +147,7 @@ Icons-Packet reúne todo el conjunto de herramientas de iconos byBias en una sol
 
 **Requisitos**
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 
 **Ejecutar**
@@ -172,7 +172,7 @@ python3 icons-packet
 
 **Prérequis**
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 **Lancer**
 ```bash
@@ -195,7 +195,7 @@ python3 icons-packet
 
 **Vereisten**
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 **Uitvoeren**
 ```bash
@@ -218,7 +218,7 @@ python3 icons-packet
 
 **Требования**
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 
 **Запуск**
@@ -244,7 +244,7 @@ python3 icons-packet
 
 **المتطلبات**
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 **التشغيل**
 ```bash
@@ -267,7 +267,7 @@ python3 icons-packet
 
 **依赖**
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 **运行**
 ```bash
@@ -290,7 +290,7 @@ python3 icons-packet
 
 **必要環境**
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils
+sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-xapp-1.0 python3-pil icoutils python3-icoextract
 ```
 **実行**
 ```bash

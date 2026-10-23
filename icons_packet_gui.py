@@ -581,10 +581,11 @@ class IconsPacketWindow(Gtk.Window):
         inner.pack_start(desc, False, False, 0)
         status = self._status_label()
 
-        if not core.wrestool_available():
+        if not core.wrestool_available() and not core.icoextract_available():
             warn = Gtk.Label()
-            warn.set_markup("<span foreground='red'>⚠ Manca 'wrestool'. "
-                            "Installa: sudo apt install icoutils</span>")
+            warn.set_markup("<span foreground='red'>" + GLib.markup_escape_text(
+                tr("⚠ Neither 'wrestool' nor 'icoextract' is installed. "
+                   "Install: sudo apt install icoutils python3-icoextract")) + "</span>")
             inner.pack_start(warn, False, False, 0)
 
         def on_click(_w):
@@ -605,9 +606,12 @@ class IconsPacketWindow(Gtk.Window):
                                 f"{GLib.markup_escape_text(str(val))}</span>")
                     return
                 tot, res = val
+                via_ico = sum(1 for r in res if r.get("method") == "icoextract")
+                extra = (" " + tr("({count} via icoextract)").format(count=via_ico)
+                         if via_ico else "")
                 status.set_text(
                     f"✔ {tot} PNG estratti da {len(res)} file. "
-                    f"Cartella: ./extracted/")
+                    f"Cartella: ./extracted/" + extra)
             run_in_thread(work, done)
 
         btn = Gtk.Button.new_with_label(tr("Choose files and extract..."))
