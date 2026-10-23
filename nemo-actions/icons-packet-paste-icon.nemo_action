@@ -1,0 +1,19 @@
+[Nemo Action]
+Active=true
+Name=Paste icon
+Name[it]=Incolla icona
+Name[de]=Symbol einfügen
+Name[es]=Pegar icono
+Name[fr]=Coller l'icône
+Name[nl]=Pictogram plakken
+Name[ru]=Вставить значок
+Name[ar]=لصق أيقونة
+Name[zh_CN]=粘贴图标
+Name[ja]=アイコンを貼り付け
+Comment=Use the image in the clipboard as the icon
+Comment[it]=Usa come icona l'immagine negli appunti
+Exec=@ENV@python3 @APP_DIR@/icons_packet_paste.py %F
+Icon-Name=edit-paste
+Selection=s
+Extensions=any;
+Quote=double
